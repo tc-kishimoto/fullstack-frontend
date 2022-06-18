@@ -11,15 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.notify_box {
-  padding: 0.5em 1em;
-  margin: 0 0 20px 0;
-  color:#666;
-  background: #ffebe9;
-  border-top: solid 5px #ff7d6e;
-}
-.notify_box p {
-  margin: 0; 
-  padding: 0;
-}
