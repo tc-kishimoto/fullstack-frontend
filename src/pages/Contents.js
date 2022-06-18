@@ -36,6 +36,9 @@ function Contents() {
     renderer.link = (href, title, text) => {
         return `<a href="${href}" target="_blank">${text}</a>`;
     }
+    renderer.img = (href, title, text) => {
+        return `<img src="${process.env.PUBLIC_URL}/${href}" alt="${text}" />`
+    }
 
     marked.setOptions({
         renderer: renderer, 
