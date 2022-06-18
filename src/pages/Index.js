@@ -1,6 +1,11 @@
+import News from "../components/domains/news";
+
 function Index() {
     return (
-        <p>Fullstack</p>
+        <div>
+            <News news={'osirase'}/>
+            <p>Fullstack</p>
+        </div>
     );
 }
 
