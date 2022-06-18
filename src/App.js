@@ -12,7 +12,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Index />}>
       </Route>
-      <Route path="/contents" element={<Contents />}>
+      <Route path="/contents/:category/:contentName" 
+              element={<Contents />}>
       </Route>
     </Routes>
   </BrowserRouter>

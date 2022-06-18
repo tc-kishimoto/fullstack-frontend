@@ -1,18 +1,18 @@
 import { marked } from "marked";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
-// import db from "../markdowns/DB/01_DBMS概要.md"
-
-// const content = axios.get('/markdowns/DB/01_DBMS概要.md')
+import { useParams } from "react-router-dom";
 
 function Contents() {
 
     const [content, setContent] = useState('');
+    
+    const { category, contentName } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-            '/markdowns/DB/01_DBMS概要.md',
+            `/markdowns/${category}/${contentName}.md`,
             );
 
             setContent(result.data);
