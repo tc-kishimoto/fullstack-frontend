@@ -68,7 +68,7 @@ function ContentsCard(props) {
 
     const categoryName = props.categoryName;
     const contens =props.contents.map((e, index) => {
-        if(isOpen || (!isOpen && index <= 5)) {
+        if(isOpen || (!isOpen && index < 5)) {
             return (
                 <p>
                     <ContentLink 
