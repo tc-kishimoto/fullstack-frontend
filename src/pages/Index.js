@@ -2,6 +2,22 @@ import News from "../components/domains/News";
 import CategoryCard from "../components/domains/CategoryCard"
 import ContentsCard from "../components/domains/ContentsCard";
 
+import styled from "styled-components";
+
+const Container = styled.div`
+    width: 70%;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: aliceblue;
+`
+
+const CategoryList = styled.div`
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`
+
 function Index() {
     const categories = [
         "DB",
@@ -100,13 +116,16 @@ function Index() {
                 />
     })
     return (
-        <div>
+        <Container>
             <News news={'osirase'}/>
-            <p>Fullstack</p>            
-            {category}
+            <CategoryList>
+                {category}
+            </CategoryList>
             <hr />
-            {contents}
-        </div>
+            <CategoryList>
+                {contents}
+            </CategoryList>
+        </Container>
     );
 }
 
