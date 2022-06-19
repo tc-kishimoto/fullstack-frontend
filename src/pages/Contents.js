@@ -6,6 +6,7 @@ import styled from "styled-components";
 import mdList from "../config/mdlist.json";
 import ScrollTop from "../components/domains/ScrollTop";
 import Meter from "../components/domains/Meter";
+import TopBar from "../components/domains/TopBar";
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -138,6 +139,7 @@ function Contents() {
 
     return (
         <div>
+            <TopBar title={contentName}/>
             <ScrollTop/>
             <Main>
                 <SideMenu 
