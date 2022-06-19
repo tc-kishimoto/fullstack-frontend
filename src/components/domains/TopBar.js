@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FaBook } from "react-icons/fa";
 import mdList from "../../config/mdlist.json";
+import { Transition } from 'react-transition-group';
+import { useState } from "react";
 
 const BarStyle = styled.div`
     width: 100%;
@@ -25,33 +27,61 @@ const ContentsLink = styled.a`
     text-decoration: none;
 `
 
+const Fade = styled.div`
+
+    transition: opacity 1s,transform 0.5s;
+    transform: translateX(
+        ${({ state }) => (state === "entering" || state === "entered" ? 0 : -105)}%
+        );
+
+    /* transform: translateX(0); */
+    /* transform: translateX(-105%); */
+    z-index: 30;
+    background-color: ghostwhite;
+    position: fixed;
+    width: 80%;
+    background-color: white;
+    overflow: auto;
+    max-height: 95%;
+`
+
 function TopBar(props) {
 
+    const [isListDisp, setIsListDisp] = useState(false)
+
     const Contents = mdList.categories.map(category => {
-        return <div>
-            {category}
+        return (
             <div>
-                {mdList.contents[category].map(content => {
-                    return (
-                        <ContentsLink href={content}>
-                            {content}
-                        </ContentsLink>
-                    );
-                })}
-                <hr/>
+                {category}
+                <div>
+                    {mdList.contents[category].map(content => {
+                        return (
+                            <ContentsLink href={content}>
+                                {content}
+                            </ContentsLink>
+                        );
+                    })}
+                    <hr/>
+                </div>
             </div>
-        </div>
+        );
     })
 
     return(
         <div>
             <BarStyle>
-                <BookLink href="#">
+                <BookLink href="#" onClick={() => setIsListDisp(isListDisp ? false : true)}>
                     <FaBook/>
                 </BookLink>
                 {props.title}
             </BarStyle>
-            {Contents}
+            <Transition in={isListDisp}>
+                {(state) => (
+                <Fade state={state}>
+                {Contents}
+                </Fade>
+                    )}
+            </Transition>
         </div>
     );
 }
