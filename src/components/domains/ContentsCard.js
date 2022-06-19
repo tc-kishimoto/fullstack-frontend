@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const ContentDiv = styled.div`
     width: 300px;
@@ -47,7 +48,7 @@ const DetailDiv = styled.div`
     overflow: hidden;
 `
 
-const MoreBtn = styled.a`
+const MoreBtn = styled.button`
     display: block;
     background-color: #666;
     width: 100px;
@@ -62,17 +63,22 @@ const MoreBtn = styled.a`
 `
 
 function ContentsCard(props) {
+
+    const [isOpen, setIsOpen] = useState(false);
+
     const categoryName = props.categoryName;
-    const contens =props.contents.map(e => {
-        return (
-            <p>
-                <ContentLink 
-                    href={e}
-                    key={e}>
-                        {e}
-                </ContentLink>
-            </p>
-        );
+    const contens =props.contents.map((e, index) => {
+        if(isOpen || (!isOpen && index <= 5)) {
+            return (
+                <p>
+                    <ContentLink 
+                        href={e}
+                        key={e}>
+                            {e}
+                    </ContentLink>
+                </p>
+            );
+        }
     });
     return(
         <ContentDiv>
@@ -85,7 +91,7 @@ function ContentsCard(props) {
             <DetailDiv>
                 {contens}
             </DetailDiv>
-            <MoreBtn href="#">open</MoreBtn>
+            <MoreBtn onClick={() => setIsOpen(isOpen ? false : true)}>{isOpen ? 'close' : 'open'}</MoreBtn>
         </ContentDiv>
     );
 }
