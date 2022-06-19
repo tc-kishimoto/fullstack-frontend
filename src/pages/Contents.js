@@ -3,8 +3,9 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import mdList from "../config/mdlist.json"
-import ScrollTop from "../components/domains/ScrollTop"
+import mdList from "../config/mdlist.json";
+import ScrollTop from "../components/domains/ScrollTop";
+import Meter from "../components/domains/Meter";
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -12,7 +13,6 @@ const ContentDiv = styled.div`
     margin: 0 10px;
     background-color: aliceblue;
     font-family: "メイリオ", "Meiryo", "Yu Gothic", "YakuHanJPs", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-}
 `
 
 const SideNav = styled.nav`
@@ -147,6 +147,7 @@ function Contents() {
                 <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
                 <Toc toc={toc} />
             </Main>
+            <Meter/>
         </div>
     );
 }
