@@ -72,7 +72,7 @@ function ContentsCard(props) {
             return (
                 <p>
                     <ContentLink 
-                        href={e}
+                        href={`/contents/${categoryName}/${e}`}
                         key={e}>
                             {e}
                     </ContentLink>
