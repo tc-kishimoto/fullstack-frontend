@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import mdList from "../config/mdlist.json"
+import ScrollTop from "../components/domains/ScrollTop"
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -136,14 +137,17 @@ function Contents() {
     const html = marked.parse(content)
 
     return (
-        <Main>
-            <SideMenu 
-                categoryName={category} 
-                contents={mdList.contents[category]} 
-            />
-            <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
-            <Toc toc={toc} />
-        </Main>
+        <div>
+            <ScrollTop/>
+            <Main>
+                <SideMenu 
+                    categoryName={category} 
+                    contents={mdList.contents[category]} 
+                />
+                <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
+                <Toc toc={toc} />
+            </Main>
+        </div>
     );
 }
 
