@@ -1,35 +1,5 @@
-import styled, { keyframes }  from 'styled-components';
-
-const NewsStyle = styled.div`
-  padding: 0.5em 1em;
-  margin: 0 0 20px 0;
-  color:#666;
-  background: #ffebe9;
-  border-top: solid 5px #ff7d6e;
-`
-
-function News(props) {
-    return (
-        <div>
-            お知らせ
-            <NewsStyle>
-                {props.news}
-            </NewsStyle>
-        </div>
-    );
-}
-
-function CategoryCard(props) {
-    const categoryName = props.categoryName;
-    return (
-        <a className="category border" href="#">
-            <div className="card">
-                <h2>{ categoryName }</h2>
-                <img className="ctg_img" alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
-            </div>
-        </a>
-    );
-}
+import News from "../components/domains/News";
+import CategoryCard from "../components/domains/CategoryCard"
 
 function Index() {
     const categories = [
@@ -63,10 +33,8 @@ function Index() {
     return (
         <div>
             <News news={'osirase'}/>
-            <p>Fullstack</p>
-            <div>
+            <p>Fullstack</p>            
             {category}
-            </div>
         </div>
     );
 }
