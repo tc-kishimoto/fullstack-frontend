@@ -14,6 +14,11 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -42,6 +47,10 @@ const Main = styled.div`
     justify-content: center;
 `
 
+const Image = styled.img`
+    max-width: 100%;
+    border: 1px solid blue;
+`
 
 
 function Toc(props) {
@@ -104,7 +113,24 @@ function Contents() {
                             )
                           }
                         ,
-                        table: Table}} children={content}/>
+                        // a({node, inline, className, children, ...props}) {
+                        //     return (
+                        //         <Link {...props}>{children}</Link>
+                        //     ) : (
+                        //         <a className={className} {...props}>
+                        //             {childres}
+                        //         </a>
+                        //     )
+                        // },
+                        a({node, inline, className, children, ...props}){ 
+                            return (<Link underline="hover" target="_blank" {...props}>{children}</Link>)},
+                        img: Image,
+                        table: Table, 
+                        tr: TableRow, 
+                        thead: TableHead, 
+                        tbody: TableBody,
+                        td: TableCell
+                        }} children={content}/>
                     <hr/>
                     <SubmissionForm/>
                 </ContentDiv>
