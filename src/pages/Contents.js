@@ -1,4 +1,3 @@
-import { marked } from "marked";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
@@ -10,6 +9,11 @@ import TopBar from "../components/domains/TopBar";
 import SubmissionForm from "../components/domains/SubmissionForm";
 import Link from '@mui/material/Link';
 import SideMenu from "../components/domains/SideMenu";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import Table from '@mui/material/Table';
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -71,38 +75,6 @@ function Contents() {
         fetchData();
     }, []);
     
-    const renderer = new marked.Renderer()
-    let count = 0;
-    const toc = [];
-    renderer.heading = (text, level) => {
-        count++;
-        const slug = encodeURI(text.toLowerCase())
-        toc.push({
-            level: level,
-            slug: slug,
-            title: text
-        })
-        return `<h${level} id="${count}">${text}</h${level}>\n`
-    }
-    renderer.link = (href, title, text) => {
-        return `<a href="${href}" target="_blank">${text}</a>`;
-    }
-    renderer.img = (href, title, text) => {
-        return `<img src="${process.env.PUBLIC_URL}/${href}" alt="${text}" />`
-    }
-
-    marked.setOptions({
-        renderer: renderer, 
-        gfm: true,
-        breaks: true,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        xhtml: false
-    });
-
-    const html = marked.parse(content)
-
     return (
         <div>
             <TopBar title={contentName}/>
@@ -113,11 +85,30 @@ function Contents() {
                     contents={mdList.contents[category]} 
                 />
                 <ContentDiv>
-                    <div dangerouslySetInnerHTML={{__html: html}}/>
+                    {/* <div dangerouslySetInnerHTML={{__html: html}}/> */}
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
+                        code({node, inline, className, children, ...props}) {
+                            const match = /language-(\w+)/.exec(className || '')
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                children={String(children).replace(/\n$/, '')}
+                                style={okaidia}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              />
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            )
+                          }
+                        ,
+                        table: Table}} children={content}/>
                     <hr/>
                     <SubmissionForm/>
                 </ContentDiv>
-                <Toc toc={toc} />
+                {/* <Toc toc={toc} /> */}
             </Main>
             <Meter/>
         </div>
