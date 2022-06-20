@@ -19,6 +19,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { marked } from "marked";
+import List from '@mui/material/List';
 
 const ContentDiv = styled.div`
     width: 60%;
@@ -38,10 +40,6 @@ const SideNav = styled.nav`
     max-height: 100vh;
 `
 
-const Li = styled.li`
-    list-style-type: none;
-`
-
 const Main = styled.div`
     display: flex;
     justify-content: center;
@@ -54,16 +52,25 @@ const Image = styled.img`
 
 
 function Toc(props) {
-    const toc = props.toc.map(e => {
-        return (
-            <Li><Link underline="hover" href={`#${e.level}`} dangerouslySetInnerHTML={{__html: '&nbsp;'.repeat(e.level - 1) + e.title}}></Link>
-            </Li>
-        );
-    });
-
+    const heading = marked.lexer(props.content).filter(token => token.type === 'heading')
+    console.log(heading)
     return (
-        <SideNav><ul>{toc}</ul></SideNav>
+        <SideNav>
+            <List>
+                {heading.map(e => {
+                    const linkStyle = {marginLeft: ((e.depth - 1) * 10) + 'px'}
+                    return (
+                        <li>
+                            <Link href={`#${e.text}`} underline="hover" style={linkStyle}>
+                                {e.text}
+                            </Link>
+                        </li>
+                    );
+                })}
+            </List>
+        </SideNav>
     );
+
 }
 
 function Contents() {
@@ -113,17 +120,11 @@ function Contents() {
                             )
                           }
                         ,
-                        // a({node, inline, className, children, ...props}) {
-                        //     return (
-                        //         <Link {...props}>{children}</Link>
-                        //     ) : (
-                        //         <a className={className} {...props}>
-                        //             {childres}
-                        //         </a>
-                        //     )
-                        // },
                         a({node, inline, className, children, ...props}){ 
                             return (<Link underline="hover" target="_blank" {...props}>{children}</Link>)},
+                        h1({node, inline, className, children}){return (<h1 id={children}>{children}</h1>)},
+                        h2({node, inline, className, children}){return (<h2 id={children}>{children}</h2>)},
+                        h3({node, inline, className, children}){return (<h3 id={children}>{children}</h3>)},
                         img: Image,
                         table: Table, 
                         tr: TableRow, 
@@ -134,7 +135,7 @@ function Contents() {
                     <hr/>
                     <SubmissionForm/>
                 </ContentDiv>
-                {/* <Toc toc={toc} /> */}
+                <Toc content={content} />
             </Main>
             <Meter/>
         </div>
