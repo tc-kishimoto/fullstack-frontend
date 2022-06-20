@@ -10,6 +10,7 @@ import mdList from "../../config/mdlist.json"
 
 const MenuIcon = styled.img`
     width: 30px;
+    height: 30px;
     margin: 0 auto;
 `
 

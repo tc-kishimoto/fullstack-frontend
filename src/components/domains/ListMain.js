@@ -13,6 +13,8 @@ const HeaderDiv = styled.div`
 `
 
 const HeaderImg = styled.img`
+    height: 120px;
+    width: 120px;
     margin: 10px;
 `
 
