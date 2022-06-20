@@ -52,10 +52,11 @@ function SearchForm() {
             displayEmpty={true}
             value={selectItem}
             onChange={handleChange}
+            color="secondary"
             >
                 { SelectList }
             </Select>
-            <TextField label="キーワード検索" variant="outlined" size="small" />
+            <TextField label="キーワード検索" variant="outlined" size="small" color="secondary" />
             <Button variant="contained" color="secondary" onClick={search}><SearchIcon /></Button>
         </form>
     )
