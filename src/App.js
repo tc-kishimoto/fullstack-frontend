@@ -1,5 +1,6 @@
 import Index from './pages/Index';
 import Contents from './pages/Contents';
+import CategoryList from './pages/CategoryList';
 import {
   BrowserRouter,
   Routes,
@@ -14,6 +15,9 @@ function App() {
       </Route>
       <Route path="/contents/:category/:contentName" 
               element={<Contents />}>
+      </Route>
+      <Route path="/list/:category" 
+              element={<CategoryList />}>
       </Route>
     </Routes>
   </BrowserRouter>
