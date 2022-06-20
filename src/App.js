@@ -2,6 +2,7 @@ import Index from './pages/Index';
 import Contents from './pages/Contents';
 import CategoryList from './pages/CategoryList';
 import Header from './components/domains/Header';
+import SearchResult from './pages/SearchResult';
 import {
   BrowserRouter,
   Routes,
@@ -22,6 +23,10 @@ function App() {
           <Route path="/list/:category" 
                   element={<CategoryList />}>
           </Route>
+          <Route path="/search" 
+                  element={<SearchResult />}>
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </div>
