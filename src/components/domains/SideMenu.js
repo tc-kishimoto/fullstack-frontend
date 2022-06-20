@@ -5,6 +5,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const SideNav = styled.nav`
@@ -40,15 +41,17 @@ function SideMenu(props) {
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>
-                <ul>
-                    {mdList.contents[e].map(content => {
-                        return (
-                            <li>
-                                <Link underline="hover" href={content}>{content}</Link>
-                            </li>
-                        );
-                    })}
-                </ul>
+                    <List>
+                        {mdList.contents[e].map(content => {
+                            return (
+                                <li>
+                                    <Link underline="hover" href={`/contents/${e}/${content}`}>
+                                        {content}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </List>
                 </Typography>
             </AccordionDetails>
             </Accordion>

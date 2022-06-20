@@ -12,6 +12,7 @@ import Link from '@mui/material/Link';
 import SideMenu from "../components/domains/SideMenu";
 
 const ContentDiv = styled.div`
+    width: 60%;
     padding: 24px;
     margin: 0 10px;
     background-color: aliceblue;
@@ -111,11 +112,11 @@ function Contents() {
                     categoryName={category} 
                     contents={mdList.contents[category]} 
                 />
-                <div>
-                    <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
+                <ContentDiv>
+                    <div dangerouslySetInnerHTML={{__html: html}}/>
                     <hr/>
                     <SubmissionForm/>
-                </div>
+                </ContentDiv>
                 <Toc toc={toc} />
             </Main>
             <Meter/>
