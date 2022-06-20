@@ -8,6 +8,8 @@ import ScrollTop from "../components/domains/ScrollTop";
 import Meter from "../components/domains/Meter";
 import TopBar from "../components/domains/TopBar";
 import SubmissionForm from "../components/domains/SubmissionForm";
+import Link from '@mui/material/Link';
+import SideMenu from "../components/domains/SideMenu";
 
 const ContentDiv = styled.div`
     padding: 24px;
@@ -30,54 +32,17 @@ const Li = styled.li`
     list-style-type: none;
 `
 
-const Link = styled.a`
-    color: #006ef1;
-    position: relative;
-    display: inline-block;
-    transition: .3s;
-    text-decoration: none;
-`
-
 const Main = styled.div`
     display: flex;
     justify-content: center;
 `
 
-function SideMenu(props) {
-    const categoryName = props.categoryName;
-    const contents = props.contents;
-    const items = contents.map(e => {
-        return (
-            <Li>
-                <Link href={`/contents/${categoryName}/${e}`}>
-                    {e}
-                </Link>
-            </Li>
-        );
-    })
-    const categories = mdList.categories.map(e => {
-        return (
-            <Li><Link href={e}>{e}</Link></Li>
-        );
-    })
-    return (
-        <SideNav>
-            <details open>
-                <summary><b>{categoryName}</b></summary>
-                <ul>{items}</ul>
-            </details>
-            <details>
-                <summary><b>カテゴリ一覧</b></summary>
-                <ul>{categories}</ul>
-            </details>
-        </SideNav>
-    );
-}
+
 
 function Toc(props) {
     const toc = props.toc.map(e => {
         return (
-            <Li><Link href={`#${e.level}`} dangerouslySetInnerHTML={{__html: '&nbsp;'.repeat(e.level - 1) + e.title}}></Link>
+            <Li><Link underline="hover" href={`#${e.level}`} dangerouslySetInnerHTML={{__html: '&nbsp;'.repeat(e.level - 1) + e.title}}></Link>
             </Li>
         );
     });
