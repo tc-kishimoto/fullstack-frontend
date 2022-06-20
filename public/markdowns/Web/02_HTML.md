@@ -532,8 +532,6 @@ HTMLタグは紹介したもの以外にも多く存在します。
 
 register.html
 
-<div class="grid grid-cols-[50%,50%] gap-4"><div>
-
 ```html
 <!DOCTYPE html>
 <html lang="ja">
@@ -574,8 +572,6 @@ register.html
   </div>
 </body>
 ```
-
-</div></div>
 
 ---
 
