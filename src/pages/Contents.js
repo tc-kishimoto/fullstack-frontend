@@ -7,9 +7,9 @@ import mdList from "../config/mdlist.json";
 import ScrollTop from "../components/domains/ScrollTop";
 import Meter from "../components/domains/Meter";
 import TopBar from "../components/domains/TopBar";
+import SubmissionForm from "../components/domains/SubmissionForm";
 
 const ContentDiv = styled.div`
-    width: 60%;
     padding: 24px;
     margin: 0 10px;
     background-color: aliceblue;
@@ -146,7 +146,11 @@ function Contents() {
                     categoryName={category} 
                     contents={mdList.contents[category]} 
                 />
-                <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
+                <div>
+                    <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
+                    <hr/>
+                    <SubmissionForm/>
+                </div>
                 <Toc toc={toc} />
             </Main>
             <Meter/>
