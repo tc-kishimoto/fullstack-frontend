@@ -32,7 +32,7 @@ const CardImg = styled.img`
 function CategoryCard(props) {
     const categoryName = props.categoryName;
     return (
-        <Link href="#">
+        <Link href={`/list/${categoryName}`}>
             <Card>
                 <H2>{ categoryName }</H2>
                 <CardImg alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
