@@ -1,4 +1,5 @@
 import Link from '@mui/material/Link';
+// import { Link as RouterLink } from "react-router-dom";
 import mdList from "../../config/mdlist.json";
 import styled from "styled-components";
 import Accordion from '@mui/material/Accordion';
@@ -6,7 +7,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const SideNav = styled.nav`
     background-color: aliceblue;
@@ -37,6 +37,9 @@ function SideMenu() {
                                         <Link underline="hover" href={`/contents/${e}/${content}`}>
                                             {content}
                                         </Link>
+                                        {/* <RouterLink to={`/contents/${e}/${content}`}>
+                                            {content}
+                                        </RouterLink> */}
                                     </li>
                                 );
                             })}
