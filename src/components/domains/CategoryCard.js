@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link as RouterLink } from "react-router-dom";
 
 const Card = styled.div`
     width: 200px;
@@ -32,12 +33,12 @@ const CardImg = styled.img`
 function CategoryCard(props) {
     const categoryName = props.categoryName;
     return (
-        <Link href={`/list/${categoryName}`}>
+        <RouterLink to={`/list/${categoryName}`}>
             <Card>
                 <H2>{ categoryName }</H2>
                 <CardImg alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
             </Card>
-        </Link>
+        </RouterLink>
     );
 }
 

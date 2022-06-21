@@ -88,7 +88,7 @@ function Contents() {
         };
 
         fetchData();
-    }, []);
+    });
     
     return (
         <div>

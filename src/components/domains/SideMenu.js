@@ -1,5 +1,5 @@
-import Link from '@mui/material/Link';
-// import { Link as RouterLink } from "react-router-dom";
+// import Link from '@mui/material/Link';
+import { Link as RouterLink } from "react-router-dom";
 import mdList from "../../config/mdlist.json";
 import styled from "styled-components";
 import Accordion from '@mui/material/Accordion';
@@ -34,12 +34,12 @@ function SideMenu() {
                             {mdList.contents[e].map(content => {
                                 return (
                                     <li>
-                                        <Link underline="hover" href={`/contents/${e}/${content}`}>
+                                        {/* <Link underline="hover" href={`/contents/${e}/${content}`}>
                                             {content}
-                                        </Link>
-                                        {/* <RouterLink to={`/contents/${e}/${content}`}>
+                                        </Link> */}
+                                        <RouterLink to={`/contents/${e}/${content}`}>
                                             {content}
-                                        </RouterLink> */}
+                                        </RouterLink>
                                     </li>
                                 );
                             })}
