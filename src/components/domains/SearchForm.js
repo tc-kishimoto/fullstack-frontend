@@ -4,6 +4,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from "react-router-dom";
 
 function SearchForm() {
     const [selectItem, setSelectItem] = React.useState('');
@@ -36,12 +37,21 @@ function SearchForm() {
 
     const SelectList =  Object.keys(item).map(s =>  {
         return (
-            <MenuItem value={item[s].value}>{ item[s].label }</MenuItem>
+            <MenuItem 
+                value={item[s].value}
+                key={item[s].value}
+                >
+                { item[s].label }
+            </MenuItem>
         )
     });
 
     function search() {
-        alert('検索');
+        // alert('検索');
+        console.log('search')
+        return (
+            <Link to="/search"></Link>
+        );
     }
 
     return (
