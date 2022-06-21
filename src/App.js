@@ -2,7 +2,7 @@ import Index from './pages/Index';
 import Contents from './pages/Contents';
 import CategoryList from './pages/CategoryList';
 import Header from './components/domains/Header';
-import SearchResult from './pages/SearchResult';
+import Search from './pages/Search';
 import {
   BrowserRouter,
   Routes,
@@ -24,7 +24,7 @@ function App() {
                   element={<CategoryList />}>
           </Route>
           <Route path="/search" 
-                  element={<SearchResult />}>
+                  element={<Search />}>
           </Route>
 
         </Routes>

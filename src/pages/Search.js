@@ -14,13 +14,13 @@ const Img = styled.img`
     margin-right: 10px;
 `
 
-function SearchResult() {
+function Search() {
     const [result, setResult] = useState([]);
 
     const search = useLocation().search;
     const query2 = new URLSearchParams(search);
     const params = new URLSearchParams;
-    params.append('keyword', query2.get('keyword'));
+    params.append('keyword', query2.get('q'));
 
     useEffect(() => {
         const fetchDate = async () => {
@@ -36,7 +36,7 @@ function SearchResult() {
 
     return(
         <Container maxWidth="md">
-          <Box sx={{ bgcolor: '#cfe8fc', p: '20px', }} >
+          <Box sx={{ bgcolor: 'aliceblue', p: '20px', }} >
             <div>{result.map(e => {
               return (
                   <div>
@@ -54,4 +54,4 @@ function SearchResult() {
 
 }
 
-export default SearchResult;
+export default Search;
