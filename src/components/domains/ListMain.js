@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import mdList from "../../config/mdlist.json"
+import Link from '@mui/material/Link';
 
 const ListDiv = styled.div`
     width: 80%;
@@ -10,17 +11,13 @@ const HeaderDiv = styled.div`
     display: flex;
     background-color: white;
     border-radius: 10px 10px 0 0;
+    color: #333333;
 `
 
 const HeaderImg = styled.img`
     height: 120px;
     width: 120px;
     margin: 10px;
-`
-
-const HeaderTitle = styled.h2`
-    color: #006ef1;
-    margin: auto;
 `
 
 const PageLinkDiv = styled.div`
@@ -40,10 +37,6 @@ const PageLinkBorder = styled.div`
     padding: 15px;
 `
 
-const PageLink = styled.a`
-    text-decoration: none;
-`
-
 function ListMain(props) {
     const categoryName = props.categoryName;
     const contents = mdList.contents[categoryName];
@@ -51,7 +44,7 @@ function ListMain(props) {
     const PageList = contents.map(c => {
         return (
             <PageLinkBorder>
-                <PageLink href={`/contents/${categoryName}/${c}`}>{ c }</PageLink>
+                <Link underline="hover" href={`/contents/${categoryName}/${c}`}>{ c }</Link>
             </PageLinkBorder>
         )
     })
@@ -61,7 +54,7 @@ function ListMain(props) {
             <HeaderDiv>
                 <HeaderImg src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
                 <div>
-                    <HeaderTitle>{ categoryName }</HeaderTitle>
+                    <h2>{ categoryName }</h2>
                     <p>カテゴリの説明</p>
                 </div>
             </HeaderDiv>
