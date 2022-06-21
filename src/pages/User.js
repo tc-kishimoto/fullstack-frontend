@@ -44,6 +44,7 @@ function User() {
             <Stack spacing={5}>
                 <Stack direction="row" justifyContent="center" spacing={5}>
                     <TextField 
+                        required
                         name="mail"
                         label="メールアドレス" 
                         variant="filled"
@@ -54,6 +55,7 @@ function User() {
                 </Stack>
                 <Stack direction="row" justifyContent="center" spacing={5}>
                     <TextField       
+                        required
                         name="loginId"      
                         label="ログインID" 
                         variant="filled"
@@ -64,6 +66,7 @@ function User() {
                 </Stack>
                 <Stack direction="row" justifyContent="center" spacing={5}>
                     <TextField 
+                        required
                         name="name"
                         label="名前" 
                         variant="filled"
@@ -84,6 +87,7 @@ function User() {
                 </Stack>
                 <Stack direction="row" justifyContent="center">
                     <TextField 
+                        required
                         name="password" 
                         label="パスワード" 
                         variant="filled" 
@@ -94,6 +98,7 @@ function User() {
                 </Stack>
                 <Stack direction="row" justifyContent="center">
                     <TextField 
+                        required
                         name="rePassword" 
                         label="パスワード（確認用）" 
                         variant="filled" 
@@ -106,6 +111,7 @@ function User() {
                     <FormControl sx={{ width: '50%'}}>
                         <InputLabel>権限</InputLabel>
                         <Select
+                            required
                             name="role"
                             label="権限"
                             value={user.role}
