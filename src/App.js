@@ -4,6 +4,7 @@ import CategoryList from './pages/CategoryList';
 import Header from './components/domains/Header';
 import Search from './pages/Search';
 import Login from './pages/Login'; 
+import User from './pages/User'; 
 
 import {
   BrowserRouter,
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/login" 
                   element={<Login />}>
+          </Route>
+          <Route path="/user" 
+                  element={<User />}>
           </Route>
         </Routes>
       </BrowserRouter>
