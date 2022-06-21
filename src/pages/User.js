@@ -4,6 +4,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 function User() {
 
@@ -14,7 +19,15 @@ function User() {
         nameKana: '',
         password: '',
         rePassword: '',
+        role: 4,
     }
+
+    const roles = [
+        {id: 1, name: 'システム管理者'},
+        {id: 2, name: '企業担当者'},
+        {id: 3, name: '講師'},
+        {id: 4, name: '一般'},
+    ]
 
     const [user, setUser] = useState(userInit);
 
@@ -90,22 +103,42 @@ function User() {
                         />
                 </Stack>
                 <Stack direction="row" justifyContent="center">
-                <Button 
-                    margin="normal" 
-                    variant="contained" 
-                    sx={{ m: 2 }}
-                    onClick={() => setUser(userInit)}
-                    >
-                    クリア
-                </Button>
-                <Button 
-                    margin="normal" 
-                    variant="contained" 
-                    sx={{ m: 2 }}
-                    onClick={() => console.log(user)}
-                    >
-                    新規登録
-                </Button>
+                    <FormControl sx={{ width: '50%'}}>
+                        <InputLabel>権限</InputLabel>
+                        <Select
+                            name="role"
+                            label="権限"
+                            value={user.role}
+                            onChange={handleChange}
+                        >
+                                {roles.map(e => {
+                                    return (
+                                        <MenuItem 
+                                            value={e.id}
+                                            key={e.id}
+                                        >{e.name}</MenuItem>
+                                    );
+                                })}
+                        </Select>
+                    </FormControl>
+                </Stack>
+                <Stack direction="row" justifyContent="center">
+                    <Button 
+                        margin="normal" 
+                        variant="contained" 
+                        sx={{ m: 2 }}
+                        onClick={() => setUser(userInit)}
+                        >
+                        クリア
+                    </Button>
+                    <Button 
+                        margin="normal" 
+                        variant="contained" 
+                        sx={{ m: 2 }}
+                        onClick={() => console.log(user)}
+                        >
+                        新規登録
+                    </Button>
                 </Stack>
             </Stack>
           </Box>
