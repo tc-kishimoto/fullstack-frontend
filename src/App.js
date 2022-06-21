@@ -3,6 +3,8 @@ import Contents from './pages/Contents';
 import CategoryList from './pages/CategoryList';
 import Header from './components/domains/Header';
 import Search from './pages/Search';
+import Login from './pages/Login'; 
+
 import {
   BrowserRouter,
   Routes,
@@ -26,7 +28,9 @@ function App() {
           <Route path="/search" 
                   element={<Search />}>
           </Route>
-
+          <Route path="/login" 
+                  element={<Login />}>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
