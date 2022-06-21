@@ -18,44 +18,32 @@ const SideNav = styled.nav`
     max-height: 100vh;
 `
 
-function SideMenu(props) {
-    const categoryName = props.categoryName;
-    const contents = props.contents;
-    // const items = contents.map(e => {
-    //     return (
-    //         <li>
-    //             <Link underline="hover" href={`/contents/${categoryName}/${e}`}>
-    //                 {e}
-    //             </Link>
-    //         </li>
-    //     );
-    // })
+function SideMenu() {
     const categories = mdList.categories.map(e => {
         return (
             <Accordion>
                 <AccordionSummary
-                aria-controls={e}
-                id={e}
-                >
-                <Typography>{e}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <Typography>
-                    <List>
-                        {mdList.contents[e].map(content => {
-                            return (
-                                <li>
-                                    <Link underline="hover" href={`/contents/${e}/${content}`}>
-                                        {content}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </List>
-                </Typography>
-            </AccordionDetails>
+                    aria-controls={e}
+                    id={e}
+                    >
+                    <Typography>{e}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        <List>
+                            {mdList.contents[e].map(content => {
+                                return (
+                                    <li>
+                                        <Link underline="hover" href={`/contents/${e}/${content}`}>
+                                            {content}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </List>
+                    </Typography>
+                </AccordionDetails>
             </Accordion>
-            
         );
     })
     return (

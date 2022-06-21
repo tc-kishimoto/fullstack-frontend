@@ -53,7 +53,6 @@ const Image = styled.img`
 
 function Toc(props) {
     const heading = marked.lexer(props.content).filter(token => token.type === 'heading')
-    console.log(heading)
     return (
         <SideNav>
             <List>
