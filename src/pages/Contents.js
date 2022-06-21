@@ -1,4 +1,3 @@
-import { marked } from "marked";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
@@ -8,8 +7,23 @@ import ScrollTop from "../components/domains/ScrollTop";
 import Meter from "../components/domains/Meter";
 import TopBar from "../components/domains/TopBar";
 import SubmissionForm from "../components/domains/SubmissionForm";
+import Link from '@mui/material/Link';
+import SideMenu from "../components/domains/SideMenu";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { marked } from "marked";
+import List from '@mui/material/List';
 
 const ContentDiv = styled.div`
+    width: 60%;
     padding: 24px;
     margin: 0 10px;
     background-color: aliceblue;
@@ -26,65 +40,37 @@ const SideNav = styled.nav`
     max-height: 100vh;
 `
 
-const Li = styled.li`
-    list-style-type: none;
-`
-
-const Link = styled.a`
-    color: #006ef1;
-    position: relative;
-    display: inline-block;
-    transition: .3s;
-    text-decoration: none;
-`
-
 const Main = styled.div`
     display: flex;
     justify-content: center;
 `
 
-function SideMenu(props) {
-    const categoryName = props.categoryName;
-    const contents = props.contents;
-    const items = contents.map(e => {
-        return (
-            <Li>
-                <Link href={`/contents/${categoryName}/${e}`}>
-                    {e}
-                </Link>
-            </Li>
-        );
-    })
-    const categories = mdList.categories.map(e => {
-        return (
-            <Li><Link href={e}>{e}</Link></Li>
-        );
-    })
-    return (
-        <SideNav>
-            <details open>
-                <summary><b>{categoryName}</b></summary>
-                <ul>{items}</ul>
-            </details>
-            <details>
-                <summary><b>カテゴリ一覧</b></summary>
-                <ul>{categories}</ul>
-            </details>
-        </SideNav>
-    );
-}
+const Image = styled.img`
+    max-width: 100%;
+    border: 1px solid blue;
+`
+
 
 function Toc(props) {
-    const toc = props.toc.map(e => {
-        return (
-            <Li><Link href={`#${e.level}`} dangerouslySetInnerHTML={{__html: '&nbsp;'.repeat(e.level - 1) + e.title}}></Link>
-            </Li>
-        );
-    });
-
+    const heading = marked.lexer(props.content).filter(token => token.type === 'heading')
+    console.log(heading)
     return (
-        <SideNav><ul>{toc}</ul></SideNav>
+        <SideNav>
+            <List>
+                {heading.map(e => {
+                    const linkStyle = {marginLeft: ((e.depth - 1) * 10) + 'px'}
+                    return (
+                        <li>
+                            <Link href={`#${e.text}`} underline="hover" style={linkStyle}>
+                                {e.text}
+                            </Link>
+                        </li>
+                    );
+                })}
+            </List>
+        </SideNav>
     );
+
 }
 
 function Contents() {
@@ -105,38 +91,6 @@ function Contents() {
         fetchData();
     }, []);
     
-    const renderer = new marked.Renderer()
-    let count = 0;
-    const toc = [];
-    renderer.heading = (text, level) => {
-        count++;
-        const slug = encodeURI(text.toLowerCase())
-        toc.push({
-            level: level,
-            slug: slug,
-            title: text
-        })
-        return `<h${level} id="${count}">${text}</h${level}>\n`
-    }
-    renderer.link = (href, title, text) => {
-        return `<a href="${href}" target="_blank">${text}</a>`;
-    }
-    renderer.img = (href, title, text) => {
-        return `<img src="${process.env.PUBLIC_URL}/${href}" alt="${text}" />`
-    }
-
-    marked.setOptions({
-        renderer: renderer, 
-        gfm: true,
-        breaks: true,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        xhtml: false
-    });
-
-    const html = marked.parse(content)
-
     return (
         <div>
             <TopBar title={contentName}/>
@@ -146,12 +100,42 @@ function Contents() {
                     categoryName={category} 
                     contents={mdList.contents[category]} 
                 />
-                <div>
-                    <ContentDiv dangerouslySetInnerHTML={{__html: html}}/>
+                <ContentDiv>
+                    {/* <div dangerouslySetInnerHTML={{__html: html}}/> */}
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
+                        code({node, inline, className, children, ...props}) {
+                            const match = /language-(\w+)/.exec(className || '')
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                children={String(children).replace(/\n$/, '')}
+                                style={okaidia}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              />
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            )
+                          }
+                        ,
+                        a({node, inline, className, children, ...props}){ 
+                            return (<Link underline="hover" target="_blank" {...props}>{children}</Link>)},
+                        h1({node, inline, className, children}){return (<h1 id={children}>{children}</h1>)},
+                        h2({node, inline, className, children}){return (<h2 id={children}>{children}</h2>)},
+                        h3({node, inline, className, children}){return (<h3 id={children}>{children}</h3>)},
+                        img: Image,
+                        table: Table, 
+                        tr: TableRow, 
+                        thead: TableHead, 
+                        tbody: TableBody,
+                        td: TableCell
+                        }} children={content}/>
                     <hr/>
                     <SubmissionForm/>
-                </div>
-                <Toc toc={toc} />
+                </ContentDiv>
+                <Toc content={content} />
             </Main>
             <Meter/>
         </div>

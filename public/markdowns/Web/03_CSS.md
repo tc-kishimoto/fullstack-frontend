@@ -194,8 +194,6 @@ CSSを適用させる方法は複数あります。以下は適用方法の例�
 
 ---
 
-<div class="grid grid-cols-[50%,50%] gap-4"><div>
-
 ```css
 /*
 * 全称セレクター
@@ -220,8 +218,6 @@ p { }
 p.sample { } 
 ```
 
-</div><div>
-
 ```css
 /*
 * idセレクター
@@ -241,8 +237,6 @@ p.sample { }
 */
 .main p { }  
 ```
-
-</div></div>
 
 ---
 
@@ -426,8 +420,6 @@ HTMLの各要素はどちらかがデフォルトになっています。
 
 以下のhtmlファイルとcssファイルを作成してください。
 
-<div class="grid grid-cols-[50%,50%] gap-4"><div>
-
 box_model.html
 
 ```html
@@ -446,8 +438,6 @@ box_model.html
 </html>
 ```
 
-</div><div>
-
 css/box_style.css
 
 ```css
@@ -457,8 +447,6 @@ css/box_style.css
   height: 200px;
 }
 ```
-
-</div></div>
 
 ---
 
@@ -487,8 +475,6 @@ css/box_style.css
 
 次に赤い枠の中に、黄色い枠を作ります。
 
-<div class="grid grid-cols-[50%,50%] gap-4"><div>
-
 box_model.html
 
 ```html
@@ -502,8 +488,6 @@ box_model.html
   </div>
 </body>
 ```
-
-</div><div>
 
 css/box_style.css
 
@@ -521,8 +505,6 @@ box_a {
   height: 100px;
 }
 ```
-
-</div></div>
 
 ---
 
