@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import mdList from "../../config/mdlist.json"
 import Link from '@mui/material/Link';
+import { Link as RouterLink } from "react-router-dom";
 
 const ListDiv = styled.div`
     width: 80%;
@@ -44,7 +45,9 @@ function ListMain(props) {
     const PageList = contents.map(c => {
         return (
             <PageLinkBorder>
-                <Link underline="hover" href={`/contents/${categoryName}/${c}`}>{ c }</Link>
+                <RouterLink to={`/contents/${categoryName}/${c}`}>
+                    <Link underline="hover">{ c }</Link>
+                </RouterLink>
             </PageLinkBorder>
         )
     })

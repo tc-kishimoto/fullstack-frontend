@@ -8,10 +8,14 @@ import NotifiMenu from './NotifiMenu';
 const HeaderDiv = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.1), 0px 4px 8px rgba(0,0,0,0.1);
 `
 
 const Logo = styled.img`
-    width: 250px;
+    width: 200px;
+    height: 50px;
+    margin: 10px 0 0 5px;
     cursor: pointer;
 `
 
@@ -22,12 +26,12 @@ const Ul = styled.ul`
 `
 
 const Li = styled.li`
-    margin: 10px;
+    margin: 0px 10px;
 `
 
 const SearchFormPare = styled.div`
     display:inline-block;
-    margin-top: 30px;
+    margin-top: 13px;
 `
 
 function Header() {
