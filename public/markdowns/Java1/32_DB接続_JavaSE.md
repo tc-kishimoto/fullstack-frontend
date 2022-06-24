@@ -5,7 +5,7 @@
 JavaとDBの連携について説明を行っていきます。
 この章を始めるにあたって、「データベース基礎」の章でusersテーブルを作成している必要があります。
 usersテーブルを作成していない場合は、「データベース基礎」の章を参照して、usersテーブルを作成してください。
-なお、データベース名は「axiz」、ユーザー名は「axizuser」とします。
+なお、データベース名は「test」、ユーザー名は「testuser」とします。
 
 ```sql
 -- テーブルの作成
@@ -19,9 +19,9 @@ id INT PRIMARY KEY
 DELETE FROM users;
 INSERT INTO users
 VALUES
-(1, 'Alice', 'alice@axiz.co.jp', 'axiz')
-, (2, 'Bob', 'bob@axiz.co.jp', 'axiz')
-, (3, 'Chris', 'chris@axiz.co.jp', NULL)
+(1, 'Alice', 'alice@test.co.jp', 'pass')
+, (2, 'Bob', 'bob@test.co.jp', 'pass')
+, (3, 'Chris', 'chris@test.co.jp', NULL)
 , (4, '佐藤', 'sato@gmail.com', 'password')
 , (5, '鈴木', 'suzuki@yahoo.co.jp', 'password')
 , (6, '田中', 'tanaka@gmail.com', 'password');
@@ -83,7 +83,7 @@ public class DbAccess {
             System.out.println(" --- before connection --- ");
 
             // database connect
-            con = DriverManager.getConnection("jdbc:postgresql:axizdb", "axizuser", "axiz");
+            con = DriverManager.getConnection("jdbc:postgresql:testdb", "testuser", "test");
 
             // confirm
             System.out.println(" --- after connection --- ");
@@ -249,7 +249,7 @@ getConnectionメソッドの引数に「DB名」「ユーザー名」「パス�
 
 ```java
 // database connect
-con = DriverManager.getConnection("jdbc:postgresql:axizdb", "axizuser", "axiz");
+con = DriverManager.getConnection("jdbc:postgresql:testdb", "testuser", "test");
 ```
 
 ---
@@ -333,10 +333,10 @@ DBへのアクセス数は上限が設定されていることが多く、上限
  --- after connection ---
 1 
 Alice
-alice@axiz.co.jp
+alice@test.co.jp
 2
 Bob
-bob@axiz.co.jp
+bob@test.co.jp
 ...
 ```
 
@@ -396,10 +396,10 @@ Eclipseで実行する環境で、JDBCドライバーが認識できていない
  --- after connection ---
 1 
 Alice
-alice@axiz.co.jp
+alice@test.co.jp
 2
 Bob
-bob@axiz.co.jp
+bob@test.co.jp
 ...
 ```
 
@@ -432,7 +432,7 @@ public class DbAccess2 {
             System.out.println(" --- before connection --- ");
 
             // database connect
-            con = DriverManager.getConnection("jdbc:postgresql:axizdb", "axizuser", "axiz");
+            con = DriverManager.getConnection("jdbc:postgresql:testdb", "testuser", "test");
 
             // confirm
             System.out.println(" --- after connection --- ");
@@ -487,7 +487,7 @@ org.postgresql.util.PSQLException: いかなる結果も、クエリによって
 (確認方法は「データベース基礎」の章を参照してください)
 
 ```sql
-axizdb=> select * from users where id = 10;
+testdb=> select * from users where id = 10;
 ```
 
 | id | name | mail | pass |
@@ -540,7 +540,7 @@ stmt.executeUpdate();
 実行した結果が正しいか、テーブルの中身をSELECT文で確認してください。
 
 ```sql
-axizdb=> select * from users where id = 11;
+testdb=> select * from users where id = 11;
 ```
 
 | id | name | mail | pass |
@@ -565,7 +565,7 @@ import java.sql.SQLException;
 public class DbAccess3 {
     public static void main(String[] args) {
         // parameter
-        String param = "axiz";
+        String param = "test";
         int param2 = 100;
         
         Connection con = null;
@@ -579,7 +579,7 @@ public class DbAccess3 {
             System.out.println(" --- before connection --- ");
 
             // database connect
-            con = DriverManager.getConnection("jdbc:postgresql:axizdb", "axizuser", "axiz");
+            con = DriverManager.getConnection("jdbc:postgresql:testdb", "testuser", "test");
 
             // confirm
             System.out.println(" --- after connection --- ");
@@ -639,7 +639,7 @@ public class DbAccess3 {
  --- after connection ---
 ```
 
-user_nameが「axiz」または、user_idが「100」のデータが居なければ情報は1レコードも取得されません。
+user_nameが「test」または、user_idが「100」のデータが居なければ情報は1レコードも取得されません。
 
 ---
 
@@ -647,7 +647,7 @@ user_nameが「axiz」または、user_idが「100」のデータが居なけれ
 
 ```java
 // parameter
-String param = "axiz' OR '1' = '1";
+String param = "test' OR '1' = '1";
 ```
 
 以下のような結果が表示されます。
@@ -657,13 +657,13 @@ String param = "axiz' OR '1' = '1";
  --- after connection ---
 1
 Alice
-alice@axiz.co.jp
+alice@test.co.jp
 2
 Bob  
-bob@axiz.co.jp
+bob@test.co.jp
 3
 Chris
-chris@axiz.co.jp
+chris@test.co.jp
 4
 佐藤 
 sato@gmail.com
@@ -680,7 +680,7 @@ tanaka@gmail.com
 先ほどのプログラムでは、以下のようなSQLが発行されます。
 
 ```sql
-SELECT * FROM users WHERE user_name = 'axiz' OR '1' = '1' OR　id = 100;
+SELECT * FROM users WHERE user_name = 'test' OR '1' = '1' OR　id = 100;
 ```
 
 このWHERE句は全レコードにマッチするため、全ての情報が引き出されることになります。
@@ -750,7 +750,7 @@ public class DbAccessKai {
             Class.forName("org.postgresql.Driver");
 
             // try-with-resource
-            try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/axizdb", "axizuser", "axiz");
+            try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testdb", "testuser", "test");
                     PreparedStatement stmt = con.prepareStatement(sql)) {
 
                 // execute

@@ -48,7 +48,7 @@ PostgreSQLのインストーラを使ってインストールを行ってくだ�
 
 スーパーユーザー「postgres」アカウントのパスワードの設定。
 任意ですが、忘れた場合はDBに接続できなくなるため、自己責任で忘れないパスワードを入力します。
-学習用で何でも良い場合は「axiz」としてください。
+学習用で何でも良い場合は「test」としてください。
 入力を終えたら［Next］を選択。
 
 ![picture 43](/images/9aa746ca5622de050fc103a896d6fc77bd950038a5f03243fd176128e7143dc4.png)  
@@ -149,16 +149,16 @@ postgres=#
 
 このユーザーを使って実際に使用するユーザーを作成します。
 
-ここでは「axizuser」という名前のユーザーを作成します。
+ここでは「testuser」という名前のユーザーを作成します。
 
-ログイン時のパスワードは「axiz」とします。
+ログイン時のパスワードは「test」とします。
 
 作成するSQLはコマンドになります。
 
 入力後に「CREATE ROLE」と出力されれば成功です。
 
 ```bash
-postgresql=# CREATE USER axizuser PASSWORD 'axiz' CREATEDB;
+postgresql=# CREATE USER testuser PASSWORD 'test' CREATEDB;
 CREATE ROLE
 ```
 
@@ -169,11 +169,11 @@ CREATE ROLE
 ユーザーを作成するためのSQLは以下になります。
 
 ```sql
-CREATE USER axizuser PASSWORD 'axiz' CREATEDB;
+CREATE USER testuser PASSWORD 'test' CREATEDB;
 ```
 
 * CREATE USERはユーザー作成時のキーワードです。
-* その後に続くaxizuserがユーザー名です。
+* その後に続くtestuserがユーザー名です。
 * PASSWORDをつけることで、作成時にパスワードを設定できます。
 * パスワードは文字列で設定する必要があります。
 SQLでは文字列は'（シングルクォーテーション）で囲う必要があります。
@@ -183,21 +183,21 @@ SQLでは文字列は'（シングルクォーテーション）で囲う必要�
 
 ### 接続の切り替え
 
-これからaxizuserで操作するために、新しいユーザーで再接続します。
+これからtestuserで操作するために、新しいユーザーで再接続します。
 
 接続を切り替えるには以下のようにします。
 
 ```bash
-postgres=# \c postgres axizuser
-ユーザ axizuser のパスワード:
+postgres=# \c postgres testuser
+ユーザ testuser のパスワード:
 ```
 
 ※バックスラッシュは、Windows環境だと￥マーク表示になります。
 
-パスワードを「axiz」を入力すると切り替わります。
+パスワードを「test」を入力すると切り替わります。
 
 ```bash
-データベース "postgres" にユーザ"axizuser"として接続しました。
+データベース "postgres" にユーザ"testuser"として接続しました。
 postgres=>
 ```
 
@@ -210,7 +210,7 @@ postgres=>
 以下のように入力してします。
 
 ```bash
-postgres=> CREATE DATABASE axizdb;
+postgres=> CREATE DATABASE testdb;
 CREATE DATABASE
 ```
 
@@ -218,18 +218,18 @@ CREATE DATABASE
 
 ### 接続の切り替え
 
-この段階では、ユーザーはaxizdbになっていますが、接続しているデータベースはpostgresなので、axizdbに切り替えます。
+この段階では、ユーザーはtestdbになっていますが、接続しているデータベースはpostgresなので、testdbに切り替えます。
 データベースを切り替えるには以下のようにします。
 
 ```bash
-postgres=> \c axizdb
-データベース "axizdb" にユーザー "axizuser"として接続しました。
-axizdb=>
+postgres=> \c testdb
+データベース "testdb" にユーザー "testuser"として接続しました。
+testdb=>
 ```
 
-左側のpostgresがaxizdbになっていれば成功です。
+左側のpostgresがtestdbになっていれば成功です。
 
-これ以降は、axizuserでaxizdbに接続接続していることを前提に話を進めます。
+これ以降は、testuserでtestdbに接続接続していることを前提に話を進めます。
 
 ---
 
@@ -238,7 +238,7 @@ axizdb=>
 DBへの接続を切るには以下のコマンドを入力します。
 
 ```bash
-axizdb=>\q
+testdb=>\q
 続行するには何かキーをおしてください . . . 
 ```
 
@@ -248,19 +248,19 @@ axizdb=>\q
 
 ### 再接続
 
-2回目以降の接続では、接続時にDB名とユーザー名を指定することで、わざわざユーザーの切り替えをする必要なく、直接axizdbに接続することが可能です。
+2回目以降の接続では、接続時にDB名とユーザー名を指定することで、わざわざユーザーの切り替えをする必要なく、直接testdbに接続することが可能です。
 
 ```bash
 Server [localhost]:
-Database [postgres]: axizdb
+Database [postgres]: testdb
 Port [5432]:
-Username [postgres]: axizuser
+Username [postgres]: testuser
 Client Encoding [SJIS]:
-ユーザー axizuser のパスワード:
+ユーザー testuser のパスワード:
 psql (14.1)
 "help"でヘルプを表示します。
 
-axizdb=>
+testdb=>
 ```
 
 ---
@@ -296,8 +296,8 @@ psql.exeのあるフォルダのパスは、インストール時にパスを変
 接続のコマンドは以下になります。
 
 ```bash
->psql -U axizuser -d axizdb
-ユーザー axizuser のパスワード
+>psql -U testuser -d testdb
+ユーザー testuser のパスワード
 ```
 
 環境変数にpsql.exeのあるフォルダを追加したことで、コマンドプロンプトからpsqlコマンドが使えるようになります。

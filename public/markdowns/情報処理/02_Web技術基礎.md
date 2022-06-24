@@ -483,11 +483,11 @@ Webブラウザの上部に表示されている、一般にhttp、またはhttp
 URLは一般に以下のような構成になります。
 
 * 全体
-  * http://www.axiz.co.jp/courese_java_base.html
+  * http://www.example.co.jp/courese_java_base.html
 * スキーム名
   * http://
 * ホスト名
-  * www.axiz.co.jp
+  * www.example.co.jp
 * パス(ファイル名)
   * courese_java_base.html
 
@@ -515,7 +515,7 @@ URL=URIとなっているのが現状です。
 インターネット上のコンピューターを一意に特定するためには、IPアドレスが必要になります。
 そのため、URLを使ってリソースを一意に特定するためにはIPアドレスの情報も必要になります。
 しかし、IPアドレスは「123.45.67.89」といった数値の羅列になっており、人間が識別・記憶するのは非常に困難です。
-そこで、人間が利用し易いように「axiz.co.jp」といった文字列からなるドメイン名が利用されています。
+そこで、人間が利用し易いように「example.co.jp」といった文字列からなるドメイン名が利用されています。
 ドメイン名を使ってインターネット上でやりとりを行うためには、これをコンピューター同士が通信するために必要なIPアドレスに変換（名前解決）しなければなりません。
 このドメイン名とIPアドレスを対応づけるしくみがドメインネームシステム（DNS）です。
 
@@ -567,7 +567,7 @@ Web上でブラウザからWebサーバーに送られるリクエストはHTTP�
 HTTPリクエストでは以下のような情報が送られています。
 
 ```text
-GET https://www.axiz.co.jp/ HTTP1.1
+GET https://www.example.co.jp/ HTTP1.1
 HOST: XXXXXX
 Connection: keep-alive
 Upgrade-Insecure-Request: 1

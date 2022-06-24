@@ -100,8 +100,8 @@ src/main/resources内にあるapplication.propertiesを以下のように変更�
 ```text
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.url=jdbc:postgresql://localhost:5432/spring_db
-spring.datasource.username=axizuser
-spring.datasource.password=axiz
+spring.datasource.username=testuser
+spring.datasource.password=test
 ```
 
 ---
@@ -219,9 +219,9 @@ application.propertiesには、データベースにアクセスするための�
 
 ```text
 spring.datasource.driver-class-name=org.postgresql.Driver
-spring.datasource.url=jdbc:postgresql://localhost:5432/axizdb
-spring.datasource.username=axizuser
-spring.datasource.password=axiz
+spring.datasource.url=jdbc:postgresql://localhost:5432/testdb
+spring.datasource.username=testuser
+spring.datasource.password=test
 ```
 
 ### application.propertiesの注意点

@@ -18,9 +18,9 @@ id INT PRIMARY KEY
 DELETE FROM users;
 INSERT INTO users
 VALUES
-(1, 'Alice', 'alice@axiz.co.jp', 'axiz')
-, (2, 'Bob', 'bob@axiz.co.jp', 'axiz')
-, (3, 'Chris', 'chris@axiz.co.jp', NULL)
+(1, 'Alice', 'alice@test.co.jp', 'test')
+, (2, 'Bob', 'bob@test.co.jp', 'test')
+, (3, 'Chris', 'chris@test.co.jp', NULL)
 , (4, '佐藤', 'sato@gmail.com', 'password')
 , (5, '鈴木', 'suzuki@yahoo.co.jp', 'password')
 , (6, '田中', 'tanaka@gmail.com', 'password');
@@ -31,9 +31,9 @@ VALUES
 実際にシステムを作っていくうえで、「システムで実現したい処理（ビジネスロジック）」と「データベースに接続する処理」が同じ場所に書かれているとメンテナンスが大変です。
 そこで「データベースに接続する処理」を部品化し、処理の見通しをよくする方法を見ていきます。
 
-この「データベースに接続する処理」というのはシステムを作るうえで「よく出るパターン」の一つです。
+この「データベースに接続する処理」というのはシステムを作るうえで「よく出るパターン」の1つです。
 システム開発では、このような「よく出るパターン」に対する設計ノウハウを、デザインパターンとしてカタログ化しています。
-そうすることで、誰でも設計ノウハウを再利用することができます。
+そうすることで、誰でも設計ノウハウを再利用できます。
 「データベースに接続する処理」に関連するデザインパターンはいくつか知られていますが、今回はDAO/DTOパターンについて見ていきます。
 
 ---
@@ -88,7 +88,7 @@ public class DbUtil {
     public static Connection getConnection() {
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/axizdb", "axizuser", "axiz");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/testdb", "testuser", "test");
         } catch (Exception e) {
             // 本来は専用の例外クラスを作成したほうがよい
             throw new RuntimeException(e);
@@ -199,8 +199,8 @@ public class UserDaoTest {
         }
 
         try (Statement stmt = connection.createStatement()) {
-            stmt.addBatch("INSERT INTO users VALUES (1, 'Alice', 'alice@axiz.co.jp', 'password')");
-            stmt.addBatch("INSERT INTO users VALUES (2, 'Bob', 'bob@axiz.co.jp', 'password')");
+            stmt.addBatch("INSERT INTO users VALUES (1, 'Alice', 'alice@test.co.jp', 'password')");
+            stmt.addBatch("INSERT INTO users VALUES (2, 'Bob', 'bob@test.co.jp', 'password')");
             stmt.executeBatch();
         }
 
@@ -220,7 +220,7 @@ public class UserDaoTest {
         User u = list.get(0);
         assertEquals(Integer.valueOf(1), u.getUserId());
         assertEquals("Alice", u.getUserName());
-        assertEquals("alice@axiz.co.jp", u.getMail());
+        assertEquals("alice@test.co.jp", u.getMail());
         assertEquals("password", u.getPass());
 
         u = list.get(1);
@@ -244,7 +244,7 @@ public class UserDaoTest {
         User user = userDao.findById(1);
         assertEquals(Integer.valueOf(1), user.getUserId());
         assertEquals("Alice", user.getUserName());
-        assertEquals("alice@axiz.co.jp", user.getMail());
+        assertEquals("alice@test.co.jp", user.getMail());
         assertEquals("password", user.getPass());
     }
 
@@ -276,7 +276,7 @@ public class UserDaoTest {
         User user = userDao.findById(1);
         assertEquals(Integer.valueOf(1), user.getUserId());
         assertEquals("Alice", user.getUserName());
-        assertEquals("alice@axiz.co.jp", user.getMail());
+        assertEquals("alice@test.co.jp", user.getMail());
 
         user.setUserName("佐藤");
         userDao.update(user);
@@ -284,7 +284,7 @@ public class UserDaoTest {
         user = userDao.findById(1);
         assertEquals(Integer.valueOf(1), user.getUserId());
         assertEquals("佐藤", user.getUserName());
-        assertEquals("alice@axiz.co.jp", user.getMail());
+        assertEquals("alice@test.co.jp", user.getMail());
     }
 
     @Test
@@ -463,8 +463,8 @@ public void setUp() throws Exception {
     }
 
     try (Statement stmt = connection.createStatement()) {
-        stmt.addBatch("INSERT INTO users VALUES (1, 'Alice', 'alice@axiz.co.jp', 'axiz')");
-        stmt.addBatch("INSERT INTO users VALUES (2, 'Bob', 'bob@axiz.co.jp', 'axiz')");
+        stmt.addBatch("INSERT INTO users VALUES (1, 'Alice', 'alice@test.co.jp', 'test')");
+        stmt.addBatch("INSERT INTO users VALUES (2, 'Bob', 'bob@test.co.jp', 'test')");
         stmt.executeBatch();
     }
 
@@ -497,7 +497,7 @@ public class DbUtil {
         try {
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection
-            ("jdbc:postgresql://localhost:5432/axizdb", "axizuser", "axiz");
+            ("jdbc:postgresql://localhost:5432/testdb", "testuser", "test");
         } catch (Exception e) {
             // 本来は専用の例外クラスを作成したほうがよい
             throw new RuntimeException(e);
@@ -599,7 +599,7 @@ public void findAllで全件取得できる() {
     User u = list.get(0);
     assertEquals(Integer.valueOf(1), u.getUserId());
     assertEquals("Alice", u.getUserName());
-    assertEquals("alice@axiz.co.jp", u.getMail());
+    assertEquals("alice@test.co.jp", u.getMail());
     assertEquals("password", u.getPass());
 
     u = list.get(1);
@@ -669,7 +669,7 @@ public void findByIdで存在するデータが正しく取得できる() {
     User user = userDao.findById(1);
     assertEquals(Integer.valueOf(1), user.getUserId());
     assertEquals("Alice", user.getUserName());
-    assertEquals("alice@axiz.co.jp", user.getMail());
+    assertEquals("alice@test.co.jp", user.getMail());
     assertEquals("password", user.getPass());
 }
 ```
@@ -795,7 +795,7 @@ public void updateでデータを更新できる() {
     User user = userDao.findById(1);
     assertEquals(Integer.valueOf(1), user.getUserId());
     assertEquals("Alice", user.getUserName());
-    assertEquals("alice@axiz.co.jp", user.getMail());
+    assertEquals("alice@test.co.jp", user.getMail());
 
     user.setUserName("佐藤");
     userDao.update(user);
@@ -803,7 +803,7 @@ public void updateでデータを更新できる() {
     user = userDao.findById(1);
     assertEquals(Integer.valueOf(1), user.getUserId());
     assertEquals("佐藤", user.getUserName());
-    assertEquals("alice@axiz.co.jp", user.getMail());
+    assertEquals("alice@test.co.jp", user.getMail());
 }
 ```
 

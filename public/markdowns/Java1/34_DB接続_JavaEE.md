@@ -12,7 +12,7 @@ JDBCを利用して連携させていきます。
 
 ```sql
 --データベース作成
-CREATE DATABASE axizdb_web;
+CREATE DATABASE testdb_web;
 
 --テーブル作成
 CREATE TABLE users (
@@ -85,7 +85,7 @@ public class DbUtil {
     public static Connection getConnection() {
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/axizdb_web", "axizuser", "axiz");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/testdb_web", "testuser", "test");
         } catch (Exception e) {
             // 本来は専用の例外クラスを作成したほうがよい
             throw new RuntimeException(e);

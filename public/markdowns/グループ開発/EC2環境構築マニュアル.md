@@ -161,7 +161,7 @@ t2.microを選択します。
 
 #### 7. セキュリティグループの設定
 
-既存のセキュリティグループを選択し、「axiz-group-develop」を選択する。
+既存のセキュリティグループを選択し、「group-develop」を選択する。
 
 選択で来たら「確認と作成」ボタンを押下します。
 
@@ -212,7 +212,7 @@ ec2 run-instancesコマンドを使用する。
 
 --image-id：マシンイメージのid（Amazon Linux 2のマシンイメージIDを指定する）
 --instance-type：インスタンスタイプ（t2.microを指定する）  
---security-group-ids：セキュリティグループのid（axiz-group-developのidを指定する）
+--security-group-ids：セキュリティグループのid（group-developのidを指定する）
 --key-name：キーの指定（予め作成したキーペアの名前を指定）  
 --subnet-id：ネットワークのサブネットの指定  
 --tag-specifications：タグの指定
@@ -342,13 +342,13 @@ $ sudo systemctl start postgresql-12.service
 ※PostgreSQLをインストールすると自動でpostgresユーザーが作成される
 
 ```bash
-# postgresのパスワード変更(ここではaxizとする)
+# postgresのパスワード変更(ここではpassとする)
 $ sudo passwd postgres
-⇒axiz
+⇒pass
 
 # ユーザーを切り替え
 $ su - postgres
-password ⇒ axiz
+password ⇒ pass
 
 # postgreSQLへログイン
 $ psql
@@ -359,8 +359,8 @@ PostgreSQL内のpostgresユーザーのパスワードを変更しておく。
 デフォルトだとパスワードは設定されていない。
 
 ```bash
-# postgreSQL内のpostgreユーザーのパスワード変更(ここではaxizとする)
-alter user postgres with password 'axiz';
+# postgreSQL内のpostgreユーザーのパスワード変更(ここではpassとする)
+alter user postgres with password 'pass';
 
 # postgresqlログアウト
 \q
@@ -401,7 +401,7 @@ $ sudo systemctl restart postgresql-12.service
 psql -h <パブリックDNS> -p 5432 -U postgres -d postgres
 ```
 
-その後パスワード（ここではaxiz）を入力して接続できることを確認する。
+その後パスワード（ここではpass）を入力して接続できることを確認する。
 
 ---
 

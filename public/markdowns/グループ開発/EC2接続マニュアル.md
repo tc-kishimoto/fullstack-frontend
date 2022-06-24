@@ -153,7 +153,7 @@ scp -i pemファイル "jarファイルのパス" ユーザー名@パブリッ�
 デスクトップのjarファイルをec2-userのホームディレクトリに転送する。
 
 ```bash
-scp -i nihonbasib_20200915.pem "C:\Users\axiz\Desktop\demo-0.0.1-SNAPSHOT.jar" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
+scp -i nihonbasib_20200915.pem "C:\Users\admin\Desktop\demo-0.0.1-SNAPSHOT.jar" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
 ```
 
 **Webアプリケーションを実行する**
@@ -211,7 +211,7 @@ scp -i pemファイル "warファイルのパス" ec2-user@パブリックDNS:~/
 例
 
 ```bash
-scp -i nihonbasib_20200915.pem "C:\Users\axiz\Desktop\demo.war" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
+scp -i nihonbasib_20200915.pem "C:\Users\admin\Desktop\demo.war" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
 ```
 
 ---
@@ -237,7 +237,7 @@ scp -i pemファイル "warファイルのパス" ec2-user@パブリックDNS:~/
 例
 
 ```bash
-scp -i nihonbasib_20200915.pem "C:\Users\axiz\Desktop\demo.war" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
+scp -i nihonbasib_20200915.pem "C:\Users\admin\Desktop\demo.war" ec2-user@ec2-18-182-18-43.ap-northeast-1.compute.amazonaws.com:~/
 ```
 
 **Tomcatの起動とwarファイルの展開**

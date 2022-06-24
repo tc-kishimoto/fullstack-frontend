@@ -28,7 +28,7 @@ SQLはRDBMS製品ごとに実装されているため、DB毎に若干の違い�
 
 DBMSのインストールがまだの場合は、MySQL、またはPostgreSQLをインストールおいてください。
 
-インストールが完了している場合はDBを起動してaxizdbに接続してください。
+インストールが完了している場合はDBを起動してtestdbに接続してください。
 
 ---
 
@@ -121,7 +121,7 @@ PostgreSQLの場合
 
 ```bash
 +------------------+
-| Tables_in_axizdb |
+| Tables_in_testdb |
 +------------------+
 | users            |
 +------------------+
@@ -334,7 +334,7 @@ INSERT INTO テーブル名
 -- 1レコードをインサート
 INSERT INTO users 
 (id, name, mail, pass)
- VALUES (1, 'Alice', 'alice@axiz.co.jp', 'axiz');
+ VALUES (1, 'Alice', 'alice@test.co.jp', 'test');
 ```
 
 以下のような結果が表示されれば成功です。
@@ -379,7 +379,7 @@ SELECT * FROM users;
 
 | id | name | mail | pass |
 |--:|:--|:--|:--|
-| 1 | Alice | alice@axiz.co.jp | axiz |
+| 1 | Alice | alice@test.co.jp | test |
 
 SELECT文はテーブルのレコードを取得する際に使用するSQL文です。
 
@@ -396,7 +396,7 @@ SELECT文についてはINSERT文の後に詳しく見ていきますが、一�
 ```sql
 INSERT INTO users 
 (id, name, mail, pass)
- VALUES (1, 'Alice', 'alice@axiz.co.jp', 'axiz');
+ VALUES (1, 'Alice', 'alice@test.co.jp', 'test');
 ```
 
 重複エラー
@@ -429,7 +429,7 @@ PRIMARY KEYに設定しているカラムは、異なるレコードで同じ値
 ```sql
 -- カラムの指定を省略してインサート
 INSERT INTO users 
-VALUES (2, 'Bob', 'bob@axiz.co.jp', 'axiz');
+VALUES (2, 'Bob', 'bob@test.co.jp', 'test');
 ```
 
 問題なく実行できたかと思います。
@@ -446,7 +446,7 @@ VALUES (2, 'Bob', 'bob@axiz.co.jp', 'axiz');
 ```sql
 -- passには値を設定しない
 INSERT INTO users (id, name, mail) 
-VALUES (3, 'Chris', 'chris@axiz.co.jp');
+VALUES (3, 'Chris', 'chris@test.co.jp');
 ```
 
 実行後はSELECT文をで中身を確認し、passの値がどうなているかを確認してください。
@@ -496,9 +496,9 @@ VALUES
 DELETE FROM users;
 INSERT INTO users
 VALUES
-(1, 'Alice', 'alice@axiz.co.jp', 'axiz')
-, (2, 'Bob', 'bob@axiz.co.jp', 'axiz')
-, (3, 'Chris', 'chris@axiz.co.jp', NULL)
+(1, 'Alice', 'alice@test.co.jp', 'test')
+, (2, 'Bob', 'bob@test.co.jp', 'test')
+, (3, 'Chris', 'chris@test.co.jp', NULL)
 , (4, '佐藤', 'sato@gmail.com', 'password')
 , (5, '鈴木', 'suzuki@yahoo.co.jp', 'password')
 , (6, '田中', 'tanaka@gmail.com', 'password');
@@ -544,9 +544,9 @@ SELECT * FROM users;
 
 | id | name   | mail | pass |
 |--:|:--|:--|:--|
-| 1 | Alice | alice@axiz.co.jp | axiz |
-| 2 | Bob   | bob@axiz.co.jp  | axiz  |
-| 3 | Chris | chris@axiz.co.jp  | NULL  |
+| 1 | Alice | alice@test.co.jp | test |
+| 2 | Bob   | bob@test.co.jp  | test  |
+| 3 | Chris | chris@test.co.jp  | NULL  |
 | 4 | 佐藤  | sato@gmail.com  | password |
 | 5 | 鈴木  | suzuki@yahoo.co.jp | password |
 | 6 | 田中  | tanaka@gmail.com | password |
@@ -568,9 +568,9 @@ FROM users;
 
 | id | name | mail |
 |--:|:--|:--|
-|     1 | Alice    | alice@axiz.co.jp  |
-|     2 | Bob      | bob@axiz.co.jp |
-|     3 | Chris    | chris@axiz.co.jp |
+|     1 | Alice    | alice@test.co.jp  |
+|     2 | Bob      | bob@test.co.jp |
+|     3 | Chris    | chris@test.co.jp |
 |     4 | 佐藤     | sato@gmail.com |
 |     5 | 鈴木     | suzuki@yahoo.co.jp  |
 |     6 | 田中     | tanaka@gmail.com   |
@@ -594,7 +594,7 @@ WHERE id = 1;
 
 | id    | name  | mail | pass |
 |--:|:--|:--|:--|
-|  1    | Alice   | alice@axiz.co.jp | axiz   |
+|  1    | Alice   | alice@test.co.jp | test   |
 
 ---
 
@@ -636,7 +636,7 @@ AND name = 'Alice';
 
 | id    | name  | mail                    | pass  |
 |--:|:--|:--|:--|
-|  1    | Alice   | alice@axiz.co.jp | axiz   |
+|  1    | Alice   | alice@test.co.jp | test   |
 
 ---
 
@@ -656,8 +656,8 @@ OR name = 'Bob';
 
 | id    | name  | mail                    | pass  |
 |--:|:--|:--|:--|
-|     1 | Alice  | alice@axiz.co.jp  | axiz    |
-|     2 | Bob    | bob@axiz.co.jp   | axiz    |
+|     1 | Alice  | alice@test.co.jp  | test    |
+|     2 | Bob    | bob@test.co.jp   | test    |
 
 ---
 
@@ -692,9 +692,9 @@ WHERE id <= 3;
 
 | id    | name  | mail                    | pass   |
 |--:|:--|:--|:--|
-|     1 | Alice   | alice@axiz.co.jp  | axiz    |
-|     2 | Bob     | bob@axiz.co.jp   | axiz    |
-|     3 | Chris   | chris@axiz.co.jp | NULL |
+|     1 | Alice   | alice@test.co.jp  | test    |
+|     2 | Bob     | bob@test.co.jp   | test    |
+|     3 | Chris   | chris@test.co.jp | NULL |
 
 ---
 
@@ -710,8 +710,8 @@ WHERE id <> 3;
 
 | id    | name   | mail                           | pass        |
 |--:|:--|:--|:--|
-|     1 | Alice    | alice@axiz.co.jp        | axiz          |
-|     2 | Bob      | bob@axiz.co.jp         | axiz          |
+|     1 | Alice    | alice@test.co.jp        | test          |
+|     2 | Bob      | bob@test.co.jp         | test          |
 |     4 | 佐藤     | sato@gmail.com       | password |
 |     5 | 鈴木     | suzuki@yahoo.co.jp  | password |
 |     6 | 田中     | tanaka@gmail.com   | password |
@@ -733,7 +733,7 @@ WHERE pass IS NULL;
 
 | id    | name  | mail                    | pass   |
 |--:|:--|:--|:--|
-|     3 | Chris   | chris@axiz.co.jp | NULL |
+|     3 | Chris   | chris@test.co.jp | NULL |
 
 ---
 
@@ -752,8 +752,8 @@ WHERE pass IS NOT NULL;
 
 | id | name | mail | pass  |
 |--:|:--|:--|:--|
-| 1 | Alice | alice@axiz.co.jp | axiz |
-| 2 | Bob | bob@axiz.co.jp | axiz |
+| 1 | Alice | alice@test.co.jp | test |
+| 2 | Bob | bob@test.co.jp | test |
 | 4 | 佐藤 | sato@gmail.com | password |
 | 5 | 鈴木 | suzuki@yahoo.co.jp | password |
 | 6 | 田中 | tanaka@gmail.com | password |
@@ -775,9 +775,9 @@ WHERE id IN (1, 2, 3);
 
 | id | name  | mail | pass |
 |--:|:--|:--|:--|
-| 1 | Alice | alice@axiz.co.jp | axiz |
-| 2 | Bob | bob@axiz.co.jp | axiz |
-| 3 | Chris | chris@axiz.co.jp | NULL |
+| 1 | Alice | alice@test.co.jp | test |
+| 2 | Bob | bob@test.co.jp | test |
+| 3 | Chris | chris@test.co.jp | NULL |
 
 ---
 
@@ -821,8 +821,8 @@ AND id <= 5;
 
 | id | name | mail | pass |
 |--:|:--|:--|:--|
-| 2 | Bob   | bob@axiz.co.jp | axiz |
-| 3 | Chris | chris@axiz.co.jp | NULL |
+| 2 | Bob   | bob@test.co.jp | test |
+| 3 | Chris | chris@test.co.jp | NULL |
 | 4 | 佐藤  | sato@gmail.com | password |
 | 5 | 鈴木  | suzuki@yahoo.co.jp | password |
 
@@ -884,7 +884,7 @@ FROM users;
 
 | id | 名前 | メールアドレス | パスワード |
 |--:|:--|:--|:--|
-| 1 | Alice | alice@axiz.co.jp  | axiz |
+| 1 | Alice | alice@test.co.jp  | test |
 
 ---
 
@@ -930,7 +930,7 @@ WHERE句を指定しないと全てのレコードが更新されるので注意
 ```sql
 -- passを変更する
 UPDATE users
-  SET pass = 'axizaxiz'
+  SET pass = 'testtest'
 WHERE id = 1;
 ```
 
@@ -943,7 +943,7 @@ WHERE id = 1;
 ```sql
 -- passを変更する
 UPDATE users
-  SET name = 'アリス', pass = 'axizaxiz'
+  SET name = 'アリス', pass = 'testtest'
 WHERE id = 1;
 ```
 
@@ -1055,7 +1055,7 @@ id INT PRIMARY KEY
 -- 1レコードをインサート
 INSERT INTO users 
 (id, name, mail, pass)
- VALUES (1, 'Alice', 'alice@axiz.co.jp', 'axiz');
+ VALUES (1, 'Alice', 'alice@test.co.jp', 'test');
 
 -- 結果の確認
 SELECT * FROM usrs;
@@ -1063,15 +1063,15 @@ SELECT * FROM usrs;
 -- 重複エラー
 INSERT INTO users 
 (id, name, mail, pass)
- VALUES (1, 'Alice', 'alice@axiz.co.jp', 'axiz');
+ VALUES (1, 'Alice', 'alice@test.co.jp', 'test');
 
 -- カラムの指定を省略してインサート
 INSERT INTO users 
-VALUES (2, 'Bob', 'bob@axiz.co.jp', 'axiz');
+VALUES (2, 'Bob', 'bob@test.co.jp', 'test');
 
 -- passには値を設定しない
 INSERT INTO users (id, name, mail) 
-VALUES (3, 'Chris', 'chris@axiz.co.jp');
+VALUES (3, 'Chris', 'chris@test.co.jp');
 
 -- まとめてインサート
 INSERT INTO users
@@ -1085,9 +1085,9 @@ VALUES
 DELETE FROM users;
 INSERT INTO users
 VALUES
-(1, 'Alice', 'alice@axiz.co.jp', 'axiz')
-, (2, 'Bob', 'bob@axiz.co.jp', 'axiz')
-, (3, 'Chris', 'chris@axiz.co.jp', NULL)
+(1, 'Alice', 'alice@test.co.jp', 'test')
+, (2, 'Bob', 'bob@test.co.jp', 'test')
+, (3, 'Chris', 'chris@test.co.jp', NULL)
 , (4, '佐藤', 'sato@gmail.com', 'password')
 , (5, '鈴木', 'suzuki@yahoo.co.jp', 'password')
 , (6, '田中', 'tanaka@gmail.com', 'password');
@@ -1152,12 +1152,12 @@ FROM users;
 
 -- passを変更する
 UPDATE users
-  SET pass = 'axizaxiz'
+  SET pass = 'testtest'
 WHERE id = 1;
 
 -- passを変更する
 UPDATE users
-  SET name = 'アリス', pass = 'axizaxiz'
+  SET name = 'アリス', pass = 'testtest'
 WHERE id = 1;
 
 -- idが1のレコードを削除する
