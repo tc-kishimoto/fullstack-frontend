@@ -1,44 +1,101 @@
-import styled from 'styled-components';
 import { Link as RouterLink } from "react-router-dom";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
 
-const Card = styled.div`
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    background-color: white;
-    border: solid #eee;
-    border-radius: 10px;
-    transition: box-shadow 0.5s ease-out, transform 0.5s ease-out;
-    box-shadow: 0 15px 10px 5px rgb(0 0 0 / 0%);
-    text-align: center;
-`
+const ExpandMore = styled((props) => {
+const { expand, ...other } = props;
+return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+marginLeft: 'auto',
+transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+}),
+}));
 
-const Link = styled.a`
-    color: #006ef1;
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-`
+const headLinkStyle = {
+    textAlign: 'center',
+    textDecoration: 'none',
+    color: 'blue'
+}
 
-const H2 = styled.h2`
-    margin: 0;
-`
-
-const CardImg = styled.img`
-    margin: auto;
-    width: 128px;
-    height: 128px;
-`
+const detailLinkStyle = {
+    textDecoration: 'none',
+    color: 'blue'
+}
 
 function CategoryCard(props) {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
     const categoryName = props.categoryName;
+
+    const contens =props.contents.map((e) => {
+        return (
+            <>
+                <RouterLink 
+                    to={`/contents/${categoryName}/${e}`}
+                    style={detailLinkStyle}
+                    key={`${categoryName}-${e}`}>
+                        {e}
+                </RouterLink>
+                <br/>
+            </>
+        )
+    });
+
     return (
-        <RouterLink to={`/list/${categoryName}`}>
-            <Card>
-                <H2>{ categoryName }</H2>
-                <CardImg alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
+        <Card sx={{ width: 200, m: 2, boxShadow: 3}}>
+                <RouterLink 
+                    to={`/list/${categoryName}`}
+                    style={headLinkStyle}
+                    >
+                    <CardHeader 
+                        title={categoryName}
+                        >
+                    </CardHeader>
+                    <CardMedia
+                        component="img"
+                        height="128"
+                        image={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`}
+                        alt={categoryName}
+                        sx={{px: 4, width: 136, }}
+                    />
+                </RouterLink>
+                    <CardContent>
+                        <Typography variant="body2" color="text.secondary">
+                        {'説明'}
+                        </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                        <ExpandMore
+                        expand={expanded}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                        >
+                            <ExpandMoreIcon />
+                        </ExpandMore>
+                    </CardActions>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                    <Typography paragraph>
+                        {contens}
+                    </Typography>
+                    </CardContent>
+                </Collapse>
             </Card>
-        </RouterLink>
     );
 }
 
