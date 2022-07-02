@@ -7,6 +7,13 @@ import Link from '@mui/material/Link';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import ScrollTop from "../components/domains/ScrollTop";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Img = styled.img`
     width: 30px;
@@ -17,16 +24,18 @@ const Img = styled.img`
 `
 
 function Search() {
-    const [result, setResult] = useState([]);
-    const [page, setPage] = useState(1);
-    const [lineNum, setLineNum] = useState(20);
-
-    const search = useLocation().search;
-    const query2 = new URLSearchParams(search);
-    const params = new URLSearchParams();
-    params.append('keyword', query2.get('q'));
-
-    useEffect(() => {
+  const search = useLocation().search;
+  const query2 = new URLSearchParams(search);
+  
+  const [result, setResult] = useState([]);
+  const [page, setPage] = useState(1);
+  const [lineNum, setLineNum] = useState(20);
+  const [text, setText] = useState('');
+  const [keyword, setKeyword] = useState(query2.get('q'));
+  
+  useEffect(() => {
+      const params = new URLSearchParams();
+      params.append('keyword', keyword);
       const fetchDate = async () => {
         const result = await axios.get(`${process.env.REACT_APP_API_URL}/searchContent`, {
             params: params,
@@ -35,10 +44,35 @@ function Search() {
       };
       
       fetchDate();
-    }, [])
+    }, [keyword])
 
     return(
-      <Container maxWidth="md">
+      <Container sx={{p: 2}} maxWidth="md">
+        <TextField 
+          id="search-text" 
+          label="検索キーワード" 
+          variant="outlined" 
+          size="small" 
+          onChange={e => setText(e.target.value)}
+          defaultValue={keyword}
+        />
+        <Button variant="contained" color="secondary" onClick={() => setKeyword(text)}><SearchIcon /></Button>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="disp-num-label">表示件数</InputLabel>
+          <Select
+            labelId="disp-num"
+            id="disp-num"
+            value={lineNum}
+            label="表示件数"
+            size="small"
+            onChange={e => setLineNum(e.target.value)}
+          >
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+          </Select>
+        </FormControl>
+        <hr />
           <div>{result.slice((page - 1) * lineNum, (page * lineNum)).map(e => {
             return (
               <div key={e.link}>
