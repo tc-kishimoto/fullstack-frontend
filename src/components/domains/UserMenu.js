@@ -6,9 +6,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useRecoilValue } from 'recoil';
+import userState from '../../states/atoms/userAtom'
 
 function UserMenu() {
 
+    const user = useRecoilValue(userState)
+    // console.log(user.name)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClose = () => {

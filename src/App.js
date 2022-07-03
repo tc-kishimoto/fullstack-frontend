@@ -12,9 +12,13 @@ import {
   Route,
 } from "react-router-dom";
 
+import {
+  RecoilRoot,
+} from 'recoil';
+
 function App() {
   return (
-    <div>
+    <RecoilRoot>
       <BrowserRouter>
       <Header />
         <Routes>
@@ -37,7 +41,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </RecoilRoot>
   );
 }
 

@@ -5,11 +5,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { useSetRecoilState } from 'recoil';
+import userState from "../states/atoms/userAtom";
 
 function Login() {
-
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+  const setUser = useSetRecoilState(userState);
 
     return (
         <Container maxWidth="xs">
@@ -44,6 +46,7 @@ function Login() {
                         if(res.status === 200) {
                           console.log('ログイン成功')
                           console.log(res.data)
+                          setUser(() => res.data.user)
                         } else {
                           console.log('ログイン失敗')
                         }
