@@ -1,21 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import SearchForm from './SearchForm';
 import UserMenu from './UserMenu';
 import NotifiMenu from './NotifiMenu';
-
-
-const HeaderDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.1), 0px 4px 8px rgba(0,0,0,0.1);
-`
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 
 const Logo = styled.img`
     width: 200px;
     height: 50px;
-    margin: 10px 0 0 5px;
+    margin: 5px 5px 5px 5px;
     cursor: pointer;
 `
 
@@ -29,33 +25,37 @@ const Li = styled.li`
     margin: 0px 10px;
 `
 
-const SearchFormPare = styled.div`
-    display:inline-block;
-    margin-top: 13px;
-`
-
 function Header() {
 
     return (
-        <HeaderDiv>
-            <Logo 
-            src={`${process.env.PUBLIC_URL}/images/index/logo.png`} 
-            onClick={() => {
-                window.location.href='/'
-            }} 
-            />
-            <SearchFormPare>
-                <SearchForm />
-            </SearchFormPare>
-            <Ul>
-                <Li>
-                    <UserMenu />
-                </Li>
-                <Li>
-                    <NotifiMenu />
-                </Li>
-            </Ul>
-        </HeaderDiv>
+        <Grid container spacing={1} m={1} borderBottom={1}>
+            <Grid item xs={6}>
+                <Logo 
+                    src={`${process.env.PUBLIC_URL}/images/index/logo.png`} 
+                    onClick={() => {
+                        window.location.href='/'
+                    }} 
+                />
+            </Grid>
+            <Grid item xs={3}>
+                <FormControl fullWidth>
+                    <TextField label="キーワード検索" variant="outlined" size="small" color="secondary" />
+                </FormControl>
+            </Grid>
+            <Grid item xs={1}>
+                <Button variant="contained" color="secondary" ><SearchIcon /></Button>
+            </Grid>
+            <Grid item xs={2} >
+                <Ul>
+                    <Li>
+                        <NotifiMenu />
+                    </Li>
+                    <Li>
+                        <UserMenu />
+                    </Li>
+                </Ul>
+            </Grid>
+        </Grid>
     )
 }
 
