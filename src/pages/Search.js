@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "../service/axios";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
@@ -38,7 +38,7 @@ function Search() {
       const params = new URLSearchParams();
       params.append('keyword', keyword);
       const fetchDate = async () => {
-        const result = await axios.get(`${process.env.REACT_APP_API_URL}/searchContent`, {
+        const result = await axios.get('/searchContent', {
             params: params,
         });
         setResult(result.data);
