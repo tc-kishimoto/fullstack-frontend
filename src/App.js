@@ -15,8 +15,8 @@ import {
 function App() {
   return (
     <div>
-      <Header />
       <BrowserRouter>
+      <Header />
         <Routes>
           <Route path="/" element={<Index />}>
           </Route>
