@@ -9,10 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useAxios } from '../service/axios';
-import RegisterDialog from '../components/domains/RegisterDialog';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import CustomizedSnackbars from '../components/domains/CustomizedSnackbarsSnackbar';
+import RegisterBtn from '../components/domains/RegistBtn';
 
 function User() {
 
@@ -36,11 +33,6 @@ function User() {
     ]
 
     const [user, setUser] = useState(userInit);
-    const [open, setOpen] = useState(false);
-    const [progressOpen, setProgressOpen] = useState(false);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [severity, setSeverity] = useState('');
-    const [message, setMessage] = useState('');
     const [companies, setCompanies] = useState([]);
 
     useEffect(() => {
@@ -50,25 +42,6 @@ function User() {
         }
         fetchDate();
     })
-
-    const handleSubmit = () => {
-        setOpen(false)
-        setProgressOpen(true)
-        axios.post('/user', {
-            ...user
-        }).then(res => {
-            console.log(res)
-            setSeverity('success')
-            setMessage('更新完了しました。')
-            setSnackbarOpen(true);
-        }).catch(error => {
-            console.log(error)
-            setSeverity('error')
-            setMessage('更新に失敗しました。')
-            setSnackbarOpen(true);
-        }
-        ).finally(() => setProgressOpen(false))
-    }
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -202,34 +175,12 @@ function User() {
                         >
                         クリア
                     </Button>
-                    <Button 
-                        margin="normal" 
-                        variant="contained" 
-                        color="secondary"
-                        sx={{ m: 2 }}
-                        onClick={() => setOpen(true)}
-                        >
-                        登録
-                    </Button>
-                    <RegisterDialog 
-                        open={open}
-                        setOpen={setOpen}
-                        handleSubmit={handleSubmit}
-                    />
+                    <RegisterBtn 
+                      endpoint={'/user'}
+                      data={user}
+                    /> 
                 </Stack>
             </Stack>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={progressOpen}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
-            <CustomizedSnackbars 
-                open={snackbarOpen}
-                setOpen={setSnackbarOpen}
-                severity={severity}
-                message={message}                    
-            />
           </Box>
         </Container>
     );
