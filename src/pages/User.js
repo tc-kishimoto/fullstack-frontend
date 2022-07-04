@@ -14,7 +14,7 @@ import RegisterBtn from '../components/domains/RegistBtn';
 function User() {
 
     const axios = useAxios();
-    const userInit = {
+    const dataInit = {
         email: '',
         login_id: '',
         name: '',
@@ -32,7 +32,7 @@ function User() {
         {id: 4, name: '一般'},
     ]
 
-    const [user, setUser] = useState(userInit);
+    const [data, setData] = useState(dataInit);
     const [companies, setCompanies] = useState([]);
 
     useEffect(() => {
@@ -45,8 +45,8 @@ function User() {
 
     const handleChange = (event) => {
         const { name, value } = event.target
-        setUser(
-            {...user, [name]: value}
+        setData(
+            {...data, [name]: value}
         )
     }
 
@@ -61,7 +61,7 @@ function User() {
                         label="メールアドレス" 
                         variant="filled"
                         sx={{ width: '50%' }} 
-                        value={user.email}
+                        value={data.email}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -72,7 +72,7 @@ function User() {
                         label="ログインID" 
                         variant="filled"
                         sx={{ width: '50%' }}
-                        value={user.login_id}
+                        value={data.login_id}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -83,7 +83,7 @@ function User() {
                         label="名前" 
                         variant="filled"
                         sx={{ width: '50%' }} 
-                        value={user.name}
+                        value={data.name}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -93,7 +93,7 @@ function User() {
                         label="名前（カナ）" 
                         variant="filled" 
                         sx={{ width: '50%' }}
-                        value={user.name_kana}
+                        value={data.name_kana}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -104,7 +104,7 @@ function User() {
                         label="パスワード" 
                         variant="filled" 
                         sx={{ width: '50%' }}
-                        value={user.password}
+                        value={data.password}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -115,7 +115,7 @@ function User() {
                         label="パスワード（確認用）" 
                         variant="filled" 
                         sx={{ width: '50%'}}
-                        value={user.rePassword}
+                        value={data.rePassword}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -126,7 +126,7 @@ function User() {
                             required
                             name="role"
                             label="権限"
-                            value={user.role}
+                            value={data.role}
                             onChange={handleChange}
                         >
                                 {roles.map(e => {
@@ -149,7 +149,7 @@ function User() {
                             required
                             name="company_id"
                             label="所属企業"
-                            value={user.company_id}
+                            value={data.company_id}
                             onChange={handleChange}
                         >
                                 {companies.map(e => {
@@ -171,13 +171,13 @@ function User() {
                         variant="contained" 
                         color="secondary"
                         sx={{ m: 2 }}
-                        onClick={() => setUser(userInit)}
+                        onClick={() => setData(dataInit)}
                         >
                         クリア
                     </Button>
                     <RegisterBtn 
                       endpoint={'/user'}
-                      data={user}
+                      data={data}
                     /> 
                 </Stack>
             </Stack>
