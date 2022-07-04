@@ -8,15 +8,20 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import { useAxios } from '../service/axios';
+import RegisterDialog from '../components/domains/RegisterDialog';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import CustomizedSnackbars from '../components/domains/CustomizedSnackbarsSnackbar';
 
 function User() {
 
+    const axios = useAxios();
     const userInit = {
-        mail: '',
-        loginId: '',
+        email: '',
+        login_id: '',
         name: '',
-        nameKana: '',
+        name_kana: '',
         password: '',
         rePassword: '',
         role: 4,
@@ -30,6 +35,30 @@ function User() {
     ]
 
     const [user, setUser] = useState(userInit);
+    const [open, setOpen] = useState(false);
+    const [progressOpen, setProgressOpen] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [severity, setSeverity] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = () => {
+        setOpen(false)
+        setProgressOpen(true)
+        axios.post('/user', {
+            ...user
+        }).then(res => {
+            console.log(res)
+            setSeverity('success')
+            setMessage('更新完了しました。')
+            setSnackbarOpen(true);
+        }).catch(error => {
+            console.log(error)
+            setSeverity('error')
+            setMessage('更新に失敗しました。')
+            setSnackbarOpen(true);
+        }
+        ).finally(() => setProgressOpen(false))
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -45,22 +74,22 @@ function User() {
                 <Stack direction="row" justifyContent="center" spacing={5}>
                     <TextField 
                         required
-                        name="mail"
+                        name="email"
                         label="メールアドレス" 
                         variant="filled"
                         sx={{ width: '50%' }} 
-                        value={user.mail}
+                        value={user.email}
                         onChange={handleChange}
                         />
                 </Stack>
                 <Stack direction="row" justifyContent="center" spacing={5}>
                     <TextField       
                         required
-                        name="loginId"      
+                        name="login_id"      
                         label="ログインID" 
                         variant="filled"
                         sx={{ width: '50%' }}
-                        value={user.loginId}
+                        value={user.login_id}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -77,11 +106,11 @@ function User() {
                 </Stack>
                 <Stack direction="row" justifyContent="center">
                     <TextField 
-                        name="nameKana" 
+                        name="name_kana" 
                         label="名前（カナ）" 
                         variant="filled" 
                         sx={{ width: '50%' }}
-                        value={user.nameKana}
+                        value={user.name_kana}
                         onChange={handleChange}
                         />
                 </Stack>
@@ -132,6 +161,7 @@ function User() {
                     <Button 
                         margin="normal" 
                         variant="contained" 
+                        color="secondary"
                         sx={{ m: 2 }}
                         onClick={() => setUser(userInit)}
                         >
@@ -140,13 +170,31 @@ function User() {
                     <Button 
                         margin="normal" 
                         variant="contained" 
+                        color="secondary"
                         sx={{ m: 2 }}
-                        onClick={() => console.log(user)}
+                        onClick={() => setOpen(true)}
                         >
-                        新規登録
+                        登録
                     </Button>
+                    <RegisterDialog 
+                        open={open}
+                        setOpen={setOpen}
+                        handleSubmit={handleSubmit}
+                    />
                 </Stack>
             </Stack>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={progressOpen}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            <CustomizedSnackbars 
+                open={snackbarOpen}
+                setOpen={setSnackbarOpen}
+                severity={severity}
+                message={message}                    
+            />
           </Box>
         </Container>
     );
