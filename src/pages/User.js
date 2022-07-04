@@ -50,75 +50,35 @@ function User() {
         )
     }
 
+    const textFields = [
+        {name: 'email', label: 'メールアドレス', type: 'text'},
+        {name: 'login_id', label: 'ログインID', type: 'text'},
+        {name: 'name', label: '名前', type: 'text'},
+        {name: 'name_kana', label: '名前（カナ）', type: 'text'},
+        {name: 'password', label: 'パスワード', type: 'password'},
+        {name: 'rePassword', label: 'パスワード（確認用）', type: 'password'},
+    ]
+
     return (
         <Container maxWidth="md">
           <Box sx={{ bgcolor: 'aliceblue', p: '20px', }} >
             <Stack spacing={5}>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField 
-                        required
-                        name="email"
-                        label="メールアドレス" 
-                        variant="filled"
-                        sx={{ width: '50%' }} 
-                        value={data.email}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField       
-                        required
-                        name="login_id"      
-                        label="ログインID" 
-                        variant="filled"
-                        sx={{ width: '50%' }}
-                        value={data.login_id}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField 
-                        required
-                        name="name"
-                        label="名前" 
-                        variant="filled"
-                        sx={{ width: '50%' }} 
-                        value={data.name}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center">
-                    <TextField 
-                        name="name_kana" 
-                        label="名前（カナ）" 
-                        variant="filled" 
-                        sx={{ width: '50%' }}
-                        value={data.name_kana}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center">
-                    <TextField 
-                        required
-                        name="password" 
-                        label="パスワード" 
-                        variant="filled" 
-                        sx={{ width: '50%' }}
-                        value={data.password}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center">
-                    <TextField 
-                        required
-                        name="rePassword" 
-                        label="パスワード（確認用）" 
-                        variant="filled" 
-                        sx={{ width: '50%'}}
-                        value={data.rePassword}
-                        onChange={handleChange}
-                        />
-                </Stack>
+                {textFields.map(e => {
+                    return(
+                        <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
+                            <TextField 
+                                required
+                                name={e.name}
+                                label={e.label}
+                                type={e.type}
+                                variant="filled"
+                                sx={{ width: '50%' }} 
+                                value={data[e.name]}
+                                onChange={handleChange}
+                                />
+                        </Stack>
+                    )
+                })}
                 <Stack direction="row" justifyContent="center">
                     <FormControl sx={{ width: '50%'}}>
                         <InputLabel>権限</InputLabel>
@@ -151,7 +111,7 @@ function User() {
                             label="所属企業"
                             value={data.company_id}
                             onChange={handleChange}
-                        >
+                            >
                                 {companies.map(e => {
                                     return (
                                         <MenuItem 

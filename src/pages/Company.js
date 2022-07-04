@@ -23,43 +23,31 @@ function Company() {
         )
     }
 
+    const textFields = [
+        {name: 'name', label: '企業名'},
+        {name: 'short_name', label: '企業名（略称）'},
+        {name: 'url', label: 'url'},
+    ]
+
     return (
         <Container maxWidth="md">
           <Box sx={{ bgcolor: 'aliceblue', p: '20px', }} >
             <Stack spacing={5}>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField 
-                        required
-                        name="name"
-                        label="企業名" 
-                        variant="filled"
-                        sx={{ width: '50%' }} 
-                        value={data.name}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField       
-                        required
-                        name="short_name"      
-                        label="企業名（略称）" 
-                        variant="filled"
-                        sx={{ width: '50%' }}
-                        value={data.short_name}
-                        onChange={handleChange}
-                        />
-                </Stack>
-                <Stack direction="row" justifyContent="center" spacing={5}>
-                    <TextField 
-                        required
-                        name="url"
-                        label="url" 
-                        variant="filled"
-                        sx={{ width: '50%' }} 
-                        value={data.url}
-                        onChange={handleChange}
-                        />
-                </Stack>
+                {textFields.map(e => {
+                    return (
+                        <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
+                            <TextField 
+                                required
+                                name={e.name}
+                                label={e.label} 
+                                variant="filled"
+                                sx={{ width: '50%' }} 
+                                value={data[e.name]}
+                                onChange={handleChange}
+                                />
+                        </Stack>
+                    )
+                })}
                 <Stack direction="row" justifyContent="center">
                     <Button 
                         margin="normal" 
