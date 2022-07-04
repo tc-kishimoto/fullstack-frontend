@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -25,6 +25,7 @@ function User() {
         password: '',
         rePassword: '',
         role: 4,
+        company_id: '',
     }
 
     const roles = [
@@ -40,6 +41,15 @@ function User() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [severity, setSeverity] = useState('');
     const [message, setMessage] = useState('');
+    const [companies, setCompanies] = useState([]);
+
+    useEffect(() => {
+        const fetchDate = async () => {
+            const result = await axios.get('/getCompanies');
+            setCompanies(result.data);
+        }
+        fetchDate();
+    })
 
     const handleSubmit = () => {
         setOpen(false)
@@ -151,7 +161,32 @@ function User() {
                                         <MenuItem 
                                             value={e.id}
                                             key={e.id}
-                                        >{e.name}</MenuItem>
+                                        >
+                                            {e.name}
+                                        </MenuItem>
+                                    );
+                                })}
+                        </Select>
+                    </FormControl>
+                </Stack>
+                <Stack direction="row" justifyContent="center">
+                    <FormControl sx={{ width: '50%'}}>
+                        <InputLabel>所属企業</InputLabel>
+                        <Select
+                            required
+                            name="company_id"
+                            label="所属企業"
+                            value={user.company_id}
+                            onChange={handleChange}
+                        >
+                                {companies.map(e => {
+                                    return (
+                                        <MenuItem 
+                                            value={e.id}
+                                            key={e.id}
+                                        >
+                                            {e.name}
+                                        </MenuItem>
                                     );
                                 })}
                         </Select>
