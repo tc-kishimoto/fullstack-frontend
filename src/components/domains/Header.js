@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { isLoginState } from '../../states/selectors/userSelector';
+import { useRecoilValue } from 'recoil';
 
 const Logo = styled.img`
     width: 200px;
@@ -29,8 +31,8 @@ const Li = styled.li`
 function Header() {
 
     const navigate = useNavigate();
-
     const [keyword, setKeyword] = useState('');
+    const isLogin = useRecoilValue(isLoginState);
 
     return (
         <Grid container spacing={1} m={1} borderBottom={1}>
@@ -61,15 +63,25 @@ function Header() {
                     <SearchIcon />
                 </Button>
             </Grid>
-            <Grid item xs={2} >
-                <Ul>
-                    <Li>
-                        <NotifiMenu />
-                    </Li>
-                    <Li>
-                        <UserMenu />
-                    </Li>
-                </Ul>
+            <Grid item xs={2}>
+                {isLogin ? (
+                    <Ul>
+                        <Li>
+                            <NotifiMenu />
+                        </Li>
+                        <Li>
+                            <UserMenu />
+                        </Li>
+                    </Ul>
+                ) : 
+                <Button 
+                    variant="outlined" 
+                    color="secondary"
+                    onClick={() => navigate('/login')}
+                >
+                    ログイン
+                </Button>
+                }
             </Grid>
         </Grid>
     )

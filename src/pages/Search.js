@@ -1,4 +1,4 @@
-import { axios } from "../service/axios";
+import { useAxios } from "../service/axios";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
@@ -28,11 +28,13 @@ function Search() {
   const search = useLocation().search;
   const query2 = new URLSearchParams(search);
   
+  
   const [result, setResult] = useState([]);
   const [page, setPage] = useState(1);
   const [lineNum, setLineNum] = useState(20);
   const [text, setText] = useState('');
   const [keyword, setKeyword] = useState(query2.get('q'));
+  const axios = useAxios();
   
   useEffect(() => {
       const params = new URLSearchParams();

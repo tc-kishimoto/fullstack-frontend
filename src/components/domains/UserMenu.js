@@ -6,13 +6,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useRecoilValue } from 'recoil';
-import userState from '../../states/atoms/userAtom'
+// import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../../states/atoms/userAtom';
+import { useAxios } from '../../service/axios';
 
 function UserMenu() {
 
-    const user = useRecoilValue(userState)
-    // console.log(user.name)
+    const axios = useAxios();
+    // const navigate = useNavigate();
+    const setUser = useSetRecoilState(userState);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClose = () => {
@@ -77,11 +80,20 @@ function UserMenu() {
                 問題管理
             </MenuItem>
             <Divider />
-            <MenuItem>
-            <ListItemIcon>
-                <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
+            <MenuItem
+                onClick={() => {
+                    // console.log('logout')
+                    axios.post('/logout')
+                    .then(res => {
+                        setUser(() => {});
+                        localStorage.removeItem('access_token');
+                    })
+                }}
+            >
+                <ListItemIcon>
+                    <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
             </MenuItem>
         </Menu>
         </div>

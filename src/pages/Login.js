@@ -6,27 +6,29 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
-import userState from "../states/atoms/userAtom";
+import { userState } from "../states/atoms/userAtom";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
   const setUser = useSetRecoilState(userState);
+  const navigate = useNavigate();
 
     return (
         <Container maxWidth="xs">
-          <Box sx={{ bgcolor: 'aliceblue', p: '20px', }} >
+          <Box sx={{ bgcolor: '#fef', p: '20px', }} >
           <Stack spacing={5}>
             <TextField 
                 id="loginId" 
                 label="ログインID またはメールアドレス" 
-                variant="filled" 
+                variant="outlined" 
                 onChange={e => setLoginId(e.target.value)}
               />
             <TextField
                 id="password"
                 label="パスワード"
-                variant="filled"
+                variant="outlined"
                 type="password"
                 autoComplete="current-password"
                 onChange={e => setPassword(e.target.value)}
@@ -34,6 +36,7 @@ function Login() {
           </Stack>
             <Stack direction="row" justifyContent="flex-end">
                 <Button margin="normal" variant="contained" 
+                  color="secondary"
                   sx={{ m: 2 }}
                   onClick={() => {
                     axios.get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`, { withCredentials: true })
@@ -44,9 +47,11 @@ function Login() {
                       }, { withCredentials: true })
                       .then(res => {
                         if(res.status === 200) {
-                          console.log('ログイン成功')
-                          console.log(res.data)
+                          // console.log('ログイン成功')
+                          // console.log(res.data)
                           setUser(() => res.data.user)
+                          localStorage.setItem('access_token', res.data.token);
+                          navigate('/')
                         } else {
                           console.log('ログイン失敗')
                         }
