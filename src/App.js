@@ -6,6 +6,7 @@ import Search from './pages/Search';
 import Login from './pages/Login'; 
 import User from './pages/User'; 
 import Company from './pages/Company'; 
+import Course from './pages/Course'; 
 
 import {
   BrowserRouter,
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path="/company" 
                   element={<Company />}>
+          </Route>
+          <Route path="/course"
+                  element={<Course />}>
           </Route>
         </Routes>
       </BrowserRouter>
