@@ -59,6 +59,10 @@ function User() {
         {name: 'rePassword', label: 'パスワード（確認用）', type: 'password'},
     ]
 
+    const validation = () => {
+
+    }
+
     return (
         <Container maxWidth="md">
           <Box sx={{ bgcolor: 'aliceblue', p: '20px', }} >
@@ -138,6 +142,7 @@ function User() {
                     <RegisterBtn 
                       endpoint={'/user'}
                       data={data}
+                      validation={validation}
                     /> 
                 </Stack>
             </Stack>
