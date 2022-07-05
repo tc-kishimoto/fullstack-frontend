@@ -15,6 +15,14 @@ const RegisterBtn = (props) => {
   const [message, setMessage] = useState('');
 
   const axios = useAxios();
+  // const validation = props.validation;
+
+  const onRegister = () => {
+    if(!props.validation()) {
+      return;
+    }
+    setDialogOpen(true)
+  }
 
   const handleSubmit = () => {
     setDialogOpen(false)
@@ -42,7 +50,7 @@ const RegisterBtn = (props) => {
         variant="contained" 
         color="secondary"
         sx={{ m: 2 }}
-        onClick={() => setDialogOpen(true)}
+        onClick={onRegister}
         >
         登録
       </Button>
