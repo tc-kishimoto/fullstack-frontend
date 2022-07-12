@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -36,41 +35,39 @@ const CourseForm = () => {
   }
 
   return (
-      <Box sx={{ bgcolor: 'aliceblue', p: '20px', }}>
-        <Stack spacing={5}>
-          <Stack direction="row" justifyContent="center" spacing={5}>
-            <TextField 
-              error={inputError}
-              inputProps={{ maxLength: 50 }}
-              inputRef={inputRef}
-              required
-              name="name"
-              label="コース名" 
-              variant="filled"
-              sx={{ width: '50%' }} 
-              value={data.name}
-              onChange={handleChange}
-              helperText={inputRef?.current?.validationMessage}
-            />
-          </Stack>
-          <Stack direction="row" justifyContent="center">
-            <Button 
-              margin="normal" 
-              variant="contained" 
-              color="secondary"
-              sx={{ m: 2 }}
-              onClick={() => setData(dataInit)}
-              >
-              クリア
-            </Button>
-            <RegisterBtn 
-              endpoint={'/course'}
-              data={data}
-              validation={validation}
-            /> 
-          </Stack>
+      <Stack spacing={5}>
+        <Stack direction="row" justifyContent="center" spacing={5}>
+          <TextField 
+            error={inputError}
+            inputProps={{ maxLength: 50 }}
+            inputRef={inputRef}
+            required
+            name="name"
+            label="コース名" 
+            variant="filled"
+            sx={{ width: '50%' }} 
+            value={data.name}
+            onChange={handleChange}
+            helperText={inputRef?.current?.validationMessage}
+          />
         </Stack>
-      </Box>
+        <Stack direction="row" justifyContent="center">
+          <Button 
+            margin="normal" 
+            variant="contained" 
+            color="secondary"
+            sx={{ m: 2 }}
+            onClick={() => setData(dataInit)}
+            >
+            クリア
+          </Button>
+          <RegisterBtn 
+            endpoint={'/course'}
+            data={data}
+            validation={validation}
+          /> 
+        </Stack>
+      </Stack>
   );
 }
 

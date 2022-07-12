@@ -4,9 +4,7 @@ import CategoryList from './pages/CategoryList';
 import Header from './components/domains/Header';
 import Search from './pages/Search';
 import Login from './pages/Login'; 
-import User from './pages/User'; 
-import Company from './pages/Company'; 
-import Course from './pages/Course'; 
+import MyPage from './pages/MyPage';
 
 import {
   BrowserRouter,
@@ -38,14 +36,8 @@ function App() {
           <Route path="/login" 
                   element={<Login />}>
           </Route>
-          <Route path="/user" 
-                  element={<User />}>
-          </Route>
-          <Route path="/company" 
-                  element={<Company />}>
-          </Route>
-          <Route path="/course"
-                  element={<Course />}>
+          <Route path="/mypage/:menu"
+                  element={<MyPage />}>
           </Route>
         </Routes>
       </BrowserRouter>

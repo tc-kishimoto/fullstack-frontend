@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -63,89 +62,86 @@ function UserForm() {
     }
 
     return (
-      <Box sx={{ bgcolor: 'aliceblue', p: '20px', width: '100%' }} >
-          <Stack spacing={5}>
-              {textFields.map(e => {
-                  return(
-                      <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
-                          <TextField 
-                              required
-                              name={e.name}
-                              label={e.label}
-                              type={e.type}
-                              variant="filled"
-                              sx={{ width: '50%' }} 
-                              value={data[e.name]}
-                              onChange={handleChange}
-                              />
-                      </Stack>
-                  )
-              })}
-              <Stack direction="row" justifyContent="center">
-                  <FormControl sx={{ width: '50%'}}>
-                      <InputLabel>権限</InputLabel>
-                      <Select
-                          required
-                          name="role"
-                          label="権限"
-                          value={data.role}
-                          onChange={handleChange}
-                      >
-                              {roles.map(e => {
-                                  return (
-                                      <MenuItem 
-                                          value={e.id}
-                                          key={e.id}
-                                      >
-                                          {e.name}
-                                      </MenuItem>
-                                  );
-                              })}
-                      </Select>
-                  </FormControl>
-              </Stack>
-              <Stack direction="row" justifyContent="center">
-                  <FormControl sx={{ width: '50%'}}>
-                      <InputLabel>所属企業</InputLabel>
-                      <Select
-                          required
-                          name="company_id"
-                          label="所属企業"
-                          value={data.company_id}
-                          onChange={handleChange}
-                          >
-                              {companies.map(e => {
-                                  return (
-                                      <MenuItem 
-                                          value={e.id}
-                                          key={e.id}
-                                      >
-                                          {e.name}
-                                      </MenuItem>
-                                  );
-                              })}
-                      </Select>
-                  </FormControl>
-              </Stack>
-              <Stack direction="row" justifyContent="center">
-                  <Button 
-                      margin="normal" 
-                      variant="contained" 
-                      color="secondary"
-                      sx={{ m: 2 }}
-                      onClick={() => setData(dataInit)}
-                      >
-                      クリア
-                  </Button>
-                  <RegisterBtn 
-                  endpoint={'/user'}
-                  data={data}
-                  validation={validation}
-                  /> 
-              </Stack>
-          </Stack>
-      </Box>
-
+        <Stack spacing={5}>
+            {textFields.map(e => {
+                return(
+                    <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
+                        <TextField 
+                            required
+                            name={e.name}
+                            label={e.label}
+                            type={e.type}
+                            variant="filled"
+                            sx={{ width: '50%' }} 
+                            value={data[e.name]}
+                            onChange={handleChange}
+                            />
+                    </Stack>
+                )
+            })}
+            <Stack direction="row" justifyContent="center">
+                <FormControl sx={{ width: '50%'}}>
+                    <InputLabel>権限</InputLabel>
+                    <Select
+                        required
+                        name="role"
+                        label="権限"
+                        value={data.role}
+                        onChange={handleChange}
+                    >
+                            {roles.map(e => {
+                                return (
+                                    <MenuItem 
+                                        value={e.id}
+                                        key={e.id}
+                                    >
+                                        {e.name}
+                                    </MenuItem>
+                                );
+                            })}
+                    </Select>
+                </FormControl>
+            </Stack>
+            <Stack direction="row" justifyContent="center">
+                <FormControl sx={{ width: '50%'}}>
+                    <InputLabel>所属企業</InputLabel>
+                    <Select
+                        required
+                        name="company_id"
+                        label="所属企業"
+                        value={data.company_id}
+                        onChange={handleChange}
+                        >
+                            {companies.map(e => {
+                                return (
+                                    <MenuItem 
+                                        value={e.id}
+                                        key={e.id}
+                                    >
+                                        {e.name}
+                                    </MenuItem>
+                                );
+                            })}
+                    </Select>
+                </FormControl>
+            </Stack>
+            <Stack direction="row" justifyContent="center">
+                <Button 
+                    margin="normal" 
+                    variant="contained" 
+                    color="secondary"
+                    sx={{ m: 2 }}
+                    onClick={() => setData(dataInit)}
+                    >
+                    クリア
+                </Button>
+                <RegisterBtn 
+                endpoint={'/user'}
+                data={data}
+                validation={validation}
+                /> 
+            </Stack>
+        </Stack>
     );
 }
 

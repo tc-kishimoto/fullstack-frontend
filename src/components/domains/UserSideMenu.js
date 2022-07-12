@@ -21,17 +21,17 @@ const UserSideMenu = () => {
     <SideNav>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate('/user')}>
+          <ListItemButton onClick={() => navigate('/mypage/user')}>
             <ListItemText primary="ユーザー管理" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate('/company')}>
+          <ListItemButton onClick={() => navigate('/mypage/company')}>
             <ListItemText primary="企業管理" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate('/course')}>
+          <ListItemButton onClick={() => navigate('/mypage/course')}>
             <ListItemText primary="コース管理" />
           </ListItemButton>
         </ListItem>
