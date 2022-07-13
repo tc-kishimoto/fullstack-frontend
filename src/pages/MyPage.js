@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import UserForm from '../components/domains/UserForm';
 import CompanyForm from '../components/domains/CompanyForm';
 import CourseForm from '../components/domains/CourseForm';
+import CompanyList from '../components/domains/CompanyList';
 
 function MyPage() {
 
@@ -15,7 +16,8 @@ function MyPage() {
             <UserSideMenu />
             <Box sx={{ bgcolor: 'aliceblue', p: '20px', width: '100%' }} >
                 {menu === 'user' ? <UserForm/> : <></>}   
-                {menu === 'company' ? <CompanyForm/> : <></>}   
+                {menu === 'company' ? <CompanyList/> : <></>}   
+                {menu === 'newCompany' ? <CompanyForm/> : <></>}   
                 {menu === 'course' ? <CourseForm/> : <></>}   
             </Box>
         </Stack>

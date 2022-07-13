@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from "react-router-dom";
 import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
 
 function SearchForm() {
 
