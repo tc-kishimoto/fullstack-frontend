@@ -47,7 +47,14 @@ const CompanyList = () => {
     {
       field: 'URL',
       headerName: 'URL',
-      width: 500,
+      width: 400,
+    },
+    {
+      field: 'id',
+      headerName: '詳細',
+      width: 100,
+      disableClickEventBubbling: true,
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {console.log(params.id)}}>詳細</Button>
     },
     
   ];
