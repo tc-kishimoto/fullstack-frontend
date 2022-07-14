@@ -36,6 +36,9 @@ function App() {
           <Route path="/login" 
                   element={<Login />}>
           </Route>
+          <Route path="/mypage"
+                  element={<MyPage />}>
+          </Route>
           <Route path="/mypage/:menu"
                   element={<MyPage />}>
           </Route>

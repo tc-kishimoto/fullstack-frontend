@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../states/atoms/userAtom';
 import { useAxios } from '../../service/axios';
@@ -14,7 +14,7 @@ import { useAxios } from '../../service/axios';
 function UserMenu() {
 
     const axios = useAxios();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const setUser = useSetRecoilState(userState);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -63,7 +63,7 @@ function UserMenu() {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem component="a" href="#">
+            <MenuItem onClick={() => navigate('/mypage')}>
             <Avatar />MyPage
             </MenuItem>
             <Divider />
