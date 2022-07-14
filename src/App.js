@@ -5,6 +5,12 @@ import Header from './components/domains/Header';
 import Search from './pages/Search';
 import Login from './pages/Login'; 
 import MyPage from './pages/MyPage';
+import CompanyList from './components/domains/CompanyList';
+import CourseList from './components/domains/CourseList';
+import UserList from './components/domains/UserList';
+import UserForm from './components/domains/UserForm';
+import CompanyForm from './components/domains/CompanyForm';
+import CourseForm from './components/domains/CourseForm';
 
 import {
   BrowserRouter,
@@ -38,9 +44,15 @@ function App() {
           </Route>
           <Route path="/mypage"
                   element={<MyPage />}>
-          </Route>
-          <Route path="/mypage/:menu"
-                  element={<MyPage />}>
+            {/* <Route path="/mypage/:menu"
+                    element={<MyPage />}>
+            </Route> */}
+            <Route path="user" element={<UserList/>}></Route>
+            <Route path="company" element={<CompanyList/>}></Route>
+            <Route path="course" element={<CourseList/>}></Route>
+            <Route path="newUser" element={<UserForm/>}></Route>
+            <Route path="newCompany" element={<CompanyForm/>}></Route>
+            <Route path="newCourse" element={<CourseForm/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
