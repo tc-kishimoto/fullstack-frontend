@@ -6,6 +6,8 @@ import UserForm from '../components/domains/UserForm';
 import CompanyForm from '../components/domains/CompanyForm';
 import CourseForm from '../components/domains/CourseForm';
 import CompanyList from '../components/domains/CompanyList';
+import CourseList from '../components/domains/CourseList';
+import UserList from '../components/domains/UserList';
 
 function MyPage() {
 
@@ -15,10 +17,12 @@ function MyPage() {
         <Stack direction={'row'} spacing="1" justifyContent="flex-start">
             <UserSideMenu />
             <Box sx={{ bgcolor: 'aliceblue', p: '20px', width: '100%' }} >
-                {menu === 'user' ? <UserForm/> : <></>}   
-                {menu === 'company' ? <CompanyList/> : <></>}   
-                {menu === 'newCompany' ? <CompanyForm/> : <></>}   
-                {menu === 'course' ? <CourseForm/> : <></>}   
+                {menu === 'company' ? <CompanyList/> : <></>}
+                {menu === 'course' ? <CourseList/> : <></>}
+                {menu === 'user' ? <UserList/> : <></>}
+                {menu === 'newCompany' ? <CompanyForm/> : <></>}
+                {menu === 'newCourse' ? <CourseForm/> : <></>} 
+                {menu === 'newUser' ? <UserForm/> : <></>} 
             </Box>
         </Stack>
     );
