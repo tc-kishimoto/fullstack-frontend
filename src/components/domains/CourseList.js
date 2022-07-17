@@ -44,7 +44,7 @@ const CourseList = () => {
       headerName: '詳細',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {console.log(params.id)}}>詳細</Button>
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/course/' + params.id)}}>詳細</Button>
     },
     
   ];
@@ -57,7 +57,7 @@ const CourseList = () => {
           variant="contained" 
           color="secondary"
           sx={{ m: 2 }}
-          onClick={() => navigate('/mypage/newCourse')}
+          onClick={() => navigate('/mypage/course/new')}
           >
           新規登録
         </Button>

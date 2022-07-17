@@ -44,15 +44,12 @@ function App() {
           </Route>
           <Route path="/mypage"
                   element={<MyPage />}>
-            {/* <Route path="/mypage/:menu"
-                    element={<MyPage />}>
-            </Route> */}
             <Route path="user" element={<UserList/>}></Route>
             <Route path="company" element={<CompanyList/>}></Route>
             <Route path="course" element={<CourseList/>}></Route>
-            <Route path="newUser" element={<UserForm/>}></Route>
-            <Route path="newCompany" element={<CompanyForm/>}></Route>
-            <Route path="newCourse" element={<CourseForm/>}></Route>
+            <Route path="user/:id" element={<UserForm/>}></Route>
+            <Route path="company/:id" element={<CompanyForm/>}></Route>
+            <Route path="course/:id" element={<CourseForm/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

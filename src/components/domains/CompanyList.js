@@ -38,6 +38,7 @@ const CompanyList = () => {
       field: 'name',
       headerName: '企業名',
       width: 300,
+      disableSelectionOnClick: true,
     },
     {
       field: 'short_name',
@@ -48,13 +49,14 @@ const CompanyList = () => {
       field: 'URL',
       headerName: 'URL',
       width: 400,
+      type: 'url'
     },
     {
       field: 'id',
       headerName: '詳細',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {console.log(params.id)}}>詳細</Button>
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>詳細</Button>
     },
     
   ];
@@ -67,7 +69,7 @@ const CompanyList = () => {
           variant="contained" 
           color="secondary"
           sx={{ m: 2 }}
-          onClick={() => navigate('/mypage/newCompany')}
+          onClick={() => navigate('/mypage/company/new')}
           >
           新規登録
         </Button>

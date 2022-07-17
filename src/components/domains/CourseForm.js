@@ -1,10 +1,15 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import RegisterBtn from './RegistBtn';
+import { useParams } from "react-router-dom";
+import { useAxios } from '../../service/axios';
 
 const CourseForm = () => {
+
+  const axios = useAxios();
+  const { id } = useParams();
 
   const dataInit = {
     name: '',
@@ -13,6 +18,14 @@ const CourseForm = () => {
   const [data, setData] = useState(dataInit);
   const [inputError, setInputError] = useState(false);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('getCourse/' + id);
+      setData(result.data);
+    };
+    if(id !== 'new') fetchData();
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target

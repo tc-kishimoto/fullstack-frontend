@@ -62,10 +62,12 @@ const UserList = () => {
     },
     {
       field: 'id',
-      headerName: '詳細',
+      headerName: '編集',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {console.log(params.id)}}>詳細</Button>
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/user/' + params.id)}}>
+          編集
+        </Button>
     },
     
   ];
@@ -78,7 +80,7 @@ const UserList = () => {
           variant="contained" 
           color="secondary"
           sx={{ m: 2 }}
-          onClick={() => navigate('/mypage/newUser')}
+          onClick={() => navigate('/mypage/user/new')}
           >
           新規登録
         </Button>
@@ -99,7 +101,7 @@ const UserList = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={5}
+          pageSize={20}
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
           autoHeight={true}
