@@ -20,11 +20,11 @@ export default function RegisterDialog(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"登録"}
+          {props.modeName}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-           登録しますか？
+          {props.modeName}しますか？
           </DialogContentText>
         </DialogContent>
         <DialogActions>

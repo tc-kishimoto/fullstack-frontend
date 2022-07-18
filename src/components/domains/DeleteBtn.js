@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import CustomizedSnackbars from './CustomizedSnackbarsSnackbar';
 
-const RegisterBtn = (props) => {
+const DeleteBtn = (props) => {
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [progressOpen, setProgressOpen] = useState(false);
@@ -15,30 +15,22 @@ const RegisterBtn = (props) => {
   const [message, setMessage] = useState('');
 
   const axios = useAxios();
-  // const validation = props.validation;
 
-  const onRegister = () => {
-    if(!props.validation()) {
-      return;
-    }
+  const onDelete = () => {
     setDialogOpen(true)
   }
-  const method = props.mode === 'new' ? axios.post : axios.put;
 
   const handleSubmit = () => {
     setDialogOpen(false)
     setProgressOpen(true)
-    method(props.endpoint, {
-        ...props.data
-    }).then(res => {
-        console.log(res)
+    axios.delete(props.endpoint + '/' + props.id)
+    .then(res => {
         setSeverity('success')
-        setMessage('更新完了しました。')
+        setMessage('削除が完了しました。')
         setSnackbarOpen(true);
     }).catch(error => {
-        console.log(error)
         setSeverity('error')
-        setMessage('更新に失敗しました。')
+        setMessage('削除に失敗しました。')
         setSnackbarOpen(true);
     }
     ).finally(() => setProgressOpen(false))
@@ -49,17 +41,17 @@ const RegisterBtn = (props) => {
       <Button 
         margin="normal" 
         variant="contained" 
-        color="secondary"
+        color="error"
         sx={{ m: 2 }}
-        onClick={onRegister}
+        onClick={onDelete}
         >
-        {props.mode === 'new' ? '登録' : '更新'}
+        削除
       </Button>
       <RegisterDialog 
         open={dialogOpen}
         setOpen={setDialogOpen}
         handleSubmit={handleSubmit}
-        modeName={props.mode === 'new' ? '登録' : '更新'}
+        modeName={'削除'}
       />
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -77,4 +69,4 @@ const RegisterBtn = (props) => {
   )
 }
 
-export default RegisterBtn;
+export default DeleteBtn;
