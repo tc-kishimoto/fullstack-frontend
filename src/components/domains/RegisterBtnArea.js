@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import RegisterBtn from './RegistBtn';
 import DeleteBtn from './DeleteBtn';
 
-const RegistBtnArea = (props) => {
+const RegisterBtnArea = (props) => {
   
   return (
     <Stack direction="row" justifyContent="center">
@@ -47,4 +47,4 @@ const RegistBtnArea = (props) => {
   )
 }
 
-export default RegistBtnArea;
+export default RegisterBtnArea;

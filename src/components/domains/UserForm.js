@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useAxios } from '../../service/axios';
 import { useParams } from "react-router-dom";
-import RegistBtnArea from './RegisterBtnArea';
+import RegisterBtnArea from './RegisterBtnArea';
 
 function UserForm() {
 
@@ -132,7 +132,7 @@ function UserForm() {
                   </Select>
                 </FormControl>
             </Stack>
-            <RegistBtnArea
+            <RegisterBtnArea
               id={id}
               mode={id === 'new' ? 'new' : 'update'}
               setData={setData}

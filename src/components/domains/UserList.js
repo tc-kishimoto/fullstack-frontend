@@ -35,6 +35,14 @@ const UserList = () => {
 
   const columns = [
     {
+      field: 'detail',
+      headerName: '詳細',
+      width: 100,
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/user/' + params.id)}}>
+          詳細
+        </Button>
+    },
+    {
       field: 'name',
       headerName: '名前',
       width: 300,

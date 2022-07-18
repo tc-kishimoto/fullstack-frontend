@@ -1,8 +1,7 @@
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useState, useRef, useEffect } from 'react';
-import RegisterBtn from './RegistBtn';
+import RegisterBtnArea from './RegisterBtnArea';
 import { useParams } from "react-router-dom";
 import { useAxios } from '../../service/axios';
 
@@ -25,7 +24,7 @@ const CourseForm = () => {
       setData(result.data);
     };
     if(id !== 'new') fetchData();
-  });
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -64,22 +63,15 @@ const CourseForm = () => {
             helperText={inputRef?.current?.validationMessage}
           />
         </Stack>
-        <Stack direction="row" justifyContent="center">
-          <Button 
-            margin="normal" 
-            variant="contained" 
-            color="secondary"
-            sx={{ m: 2 }}
-            onClick={() => setData(dataInit)}
-            >
-            クリア
-          </Button>
-          <RegisterBtn 
-            endpoint={'/course'}
-            data={data}
-            validation={validation}
-          /> 
-        </Stack>
+        <RegisterBtnArea
+          id={id}
+          mode={id === 'new' ? 'new' : 'update'}
+          setData={setData}
+          dataInit={dataInit}
+          data={data}
+          validation={validation}
+          endpoint={'/course'}
+            />
       </Stack>
   );
 }

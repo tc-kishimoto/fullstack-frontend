@@ -1,29 +1,40 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useState, useRef } from 'react';
-import RegisterBtn from './RegistBtn';
+import { useState, useRef, useEffect } from 'react';
+import RegisterBtnArea from './RegisterBtnArea';
+import { useParams } from "react-router-dom";
+import { useAxios } from '../../service/axios';
 
 function CompanyForm() {
 
-    const dataInit = {
-      name: '',
-      short_name: '',
-      url: '',
-    }
+  const axios = useAxios();
+  const { id } = useParams();
 
-    const [data, setData] = useState(dataInit);
-    const [inputError, setInputError] = useState(false);
+  const dataInit = {
+    name: '',
+    short_name: '',
+    url: '',
+  }
 
-    const inputRef = useRef(null);
+  const [data, setData] = useState(dataInit);
+  const [inputError, setInputError] = useState(false);
+  const inputRef = useRef(null);
 
-    const handleChange = (event) => {
-        
-        const { name, value } = event.target
-        setData(
-            {...data, [name]: value}
-        )
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('getCompany/' + id);
+      setData(result.data);
+    };
+    if(id !== 'new') fetchData();
+  }, []);
+
+  const handleChange = (event) => {    
+    const { name, value } = event.target
+      setData(
+          {...data, [name]: value}
+      )
+  }
 
     const validation = () => {
       if (inputRef.current) {
@@ -69,30 +80,23 @@ function CompanyForm() {
           <Stack direction="row" justifyContent="center" spacing={5}>
             <TextField 
               inputProps={{ maxLength: 255, }}
-              name="url"
-              label="url"
+              name="URL"
+              label="URL"
               variant="filled"
               sx={{ width: '50%' }} 
-              value={data.url}
+              value={data.URL}
               onChange={handleChange}
             />
           </Stack>
-          <Stack direction="row" justifyContent="center">
-              <Button 
-                  margin="normal" 
-                  variant="contained" 
-                  color="secondary"
-                  sx={{ m: 2 }}
-                  onClick={() => setData(dataInit)}
-                  >
-                  クリア
-              </Button>
-              <RegisterBtn 
-                endpoint={'/company'}
-                data={data}
-                validation={validation}
-              /> 
-          </Stack>
+          <RegisterBtnArea
+              id={id}
+              mode={id === 'new' ? 'new' : 'update'}
+              setData={setData}
+              dataInit={dataInit}
+              data={data}
+              validation={validation}
+              endpoint={'/company'}
+            />
       </Stack>
     );
 }

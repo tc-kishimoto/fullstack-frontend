@@ -35,6 +35,12 @@ const CompanyList = () => {
 
   const columns = [
     {
+      field: 'detail',
+      headerName: '詳細',
+      width: 100,
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>詳細</Button>
+    },
+    {
       field: 'name',
       headerName: '企業名',
       width: 300,
@@ -53,10 +59,9 @@ const CompanyList = () => {
     },
     {
       field: 'id',
-      headerName: '詳細',
+      headerName: '編集',
       width: 100,
-      disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>詳細</Button>
+      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>編集</Button>
     },
     
   ];
