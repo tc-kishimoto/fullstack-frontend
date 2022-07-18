@@ -1,13 +1,12 @@
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import RegisterBtnArea from './RegisterBtnArea';
 import { useParams } from "react-router-dom";
-import { useAxios } from '../../service/axios';
+import FetchData from './FetchData';
 
 function CompanyForm() {
 
-  const axios = useAxios();
   const { id } = useParams();
 
   const dataInit = {
@@ -19,14 +18,6 @@ function CompanyForm() {
   const [data, setData] = useState(dataInit);
   const [inputError, setInputError] = useState(false);
   const inputRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('getCompany/' + id);
-      setData(result.data);
-    };
-    if (id !== 'new') fetchData();
-  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -95,6 +86,11 @@ function CompanyForm() {
         data={data}
         validation={validation}
         endpoint={'/company'}
+      />
+      <FetchData
+        id={id}
+        setData={setData}
+        endpoint={'getCompany'}
       />
     </Stack>
   );

@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import { useAxios } from '../../service/axios';
 import { useParams } from "react-router-dom";
 import RegisterBtnArea from './RegisterBtnArea';
+import FetchData from './FetchData';
 
 function UserForm() {
 
@@ -40,12 +41,7 @@ function UserForm() {
       const result = await axios.get('/getCompanies');
       setCompanies(result.data);
     }
-    const getUser = async () => {
-      const result = await axios.get('getUser/' + id);
-      setData(result.data);
-    };
     fetchDate();
-    getUser();
   }, [])
 
   const handleChange = (event) => {
@@ -140,6 +136,11 @@ function UserForm() {
         data={data}
         validation={validation}
         endpoint={'/user'}
+      />
+      <FetchData
+        id={id}
+        setData={setData}
+        endpoint={'getUser'}
       />
     </Stack>
   );

@@ -1,13 +1,12 @@
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import RegisterBtnArea from './RegisterBtnArea';
 import { useParams } from "react-router-dom";
-import { useAxios } from '../../service/axios';
+import FetchData from './FetchData';
 
 const CourseForm = () => {
 
-  const axios = useAxios();
   const { id } = useParams();
 
   const dataInit = {
@@ -17,14 +16,6 @@ const CourseForm = () => {
   const [data, setData] = useState(dataInit);
   const [inputError, setInputError] = useState(false);
   const inputRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('getCourse/' + id);
-      setData(result.data);
-    };
-    if (id !== 'new') fetchData();
-  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -71,6 +62,11 @@ const CourseForm = () => {
         data={data}
         validation={validation}
         endpoint={'/course'}
+      />
+      <FetchData
+        id={id}
+        setData={setData}
+        endpoint={'getCourse'}
       />
     </Stack>
   );
