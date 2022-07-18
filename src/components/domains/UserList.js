@@ -48,28 +48,28 @@ const UserList = () => {
     {
       field: 'name',
       headerName: '名前',
-      width: 300,
+      width: 230,
       disableSelectionOnClick: true,
     },
     {
       field: 'name_kana',
       headerName: 'カナ',
-      width: 300,
+      width: 230,
     },
     {
       field: 'role_name',
       headerName: '権限',
-      width: 300,
+      width: 150,
     },
     {
-      field: 'company_name',
+      field: 'company_short_name',
       headerName: '所属企業',
-      width: 300,
+      width: 150,
     },
     {
-      field: 'created_at',
+      field: 'created_date',
       headerName: '登録日時',
-      width: 300,
+      width: 100,
     },
     {
       field: 'id',
