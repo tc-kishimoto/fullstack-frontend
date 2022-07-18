@@ -3,10 +3,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import FormControl from '@mui/material/FormControl';
-import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useAxios } from '../../service/axios';
+import UserDataGrid from './UserDataGrid';
 
 const UserList = () => {
 
@@ -32,59 +32,6 @@ const UserList = () => {
     };
     fetchDate();
   }, [])
-
-  const columns = [
-    {
-      field: 'detail',
-      headerName: '詳細',
-      width: 100,
-      renderCell: (params) => <Button
-        variant="contained"
-        color="primary"
-        onClick={() => { navigate('/mypage/user/' + params.id) }}>
-        詳細
-      </Button>
-    },
-    {
-      field: 'name',
-      headerName: '名前',
-      width: 230,
-      disableSelectionOnClick: true,
-    },
-    {
-      field: 'name_kana',
-      headerName: 'カナ',
-      width: 230,
-    },
-    {
-      field: 'role_name',
-      headerName: '権限',
-      width: 150,
-    },
-    {
-      field: 'company_short_name',
-      headerName: '所属企業',
-      width: 150,
-    },
-    {
-      field: 'created_date',
-      headerName: '登録日時',
-      width: 100,
-    },
-    {
-      field: 'id',
-      headerName: '編集',
-      width: 100,
-      disableClickEventBubbling: true,
-      renderCell: (params) => <Button
-        variant="contained"
-        color="primary"
-        onClick={() => { navigate('/mypage/user/' + params.id) }}>
-        編集
-      </Button>
-    },
-
-  ];
 
   return (
     <Stack spacing={3}>
@@ -112,13 +59,8 @@ const UserList = () => {
         <Button variant="contained" color="secondary" onClick={() => search()}><SearchIcon /></Button>
       </Stack>
       <Stack direction="row" justifyContent="center" spacing={5} >
-        <DataGrid
-          rows={data}
-          columns={columns}
-          pageSize={20}
-          rowsPerPageOptions={[5]}
-          disableSelectionOnClick
-          autoHeight={true}
+        <UserDataGrid 
+          data={data}
         />
       </Stack>
     </Stack>
