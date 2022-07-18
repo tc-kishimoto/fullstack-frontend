@@ -1,6 +1,5 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 
 function SubmissionForm() {

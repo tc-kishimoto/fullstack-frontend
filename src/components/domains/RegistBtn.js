@@ -15,7 +15,6 @@ const RegisterBtn = (props) => {
   const [message, setMessage] = useState('');
 
   const axios = useAxios();
-  // const validation = props.validation;
 
   const onRegister = () => {
     if (!props.validation()) {
@@ -31,12 +30,10 @@ const RegisterBtn = (props) => {
     method(props.endpoint, {
       ...props.data
     }).then(res => {
-      console.log(res)
       setSeverity('success')
       setMessage('更新完了しました。')
       setSnackbarOpen(true);
     }).catch(error => {
-      console.log(error)
       setSeverity('error')
       setMessage('更新に失敗しました。')
       setSnackbarOpen(true);
