@@ -38,12 +38,12 @@ const MySubmissionList = () => {
       field: 'detail',
       headerName: '詳細',
       width: 100,
-      renderCell: (params) => <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => {navigate('/mypage/submission/' + params.id)}}>
-          編集
-        </Button>
+      renderCell: (params) => <Button
+        variant="contained"
+        color="primary"
+        onClick={() => { navigate('/mypage/submission/' + params.id) }}>
+        編集
+      </Button>
     },
   ];
 

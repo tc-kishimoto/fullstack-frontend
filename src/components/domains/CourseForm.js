@@ -23,13 +23,13 @@ const CourseForm = () => {
       const result = await axios.get('getCourse/' + id);
       setData(result.data);
     };
-    if(id !== 'new') fetchData();
+    if (id !== 'new') fetchData();
   }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setData(
-        {...data, [name]: value}
+      { ...data, [name]: value }
     )
   }
 
@@ -47,32 +47,32 @@ const CourseForm = () => {
   }
 
   return (
-      <Stack spacing={5}>
-        <Stack direction="row" justifyContent="center" spacing={5}>
-          <TextField 
-            error={inputError}
-            inputProps={{ maxLength: 50 }}
-            inputRef={inputRef}
-            required
-            name="name"
-            label="コース名" 
-            variant="filled"
-            sx={{ width: '50%' }} 
-            value={data.name}
-            onChange={handleChange}
-            helperText={inputRef?.current?.validationMessage}
-          />
-        </Stack>
-        <RegisterBtnArea
-          id={id}
-          mode={id === 'new' ? 'new' : 'update'}
-          setData={setData}
-          dataInit={dataInit}
-          data={data}
-          validation={validation}
-          endpoint={'/course'}
-            />
+    <Stack spacing={5}>
+      <Stack direction="row" justifyContent="center" spacing={5}>
+        <TextField
+          error={inputError}
+          inputProps={{ maxLength: 50 }}
+          inputRef={inputRef}
+          required
+          name="name"
+          label="コース名"
+          variant="filled"
+          sx={{ width: '50%' }}
+          value={data.name}
+          onChange={handleChange}
+          helperText={inputRef?.current?.validationMessage}
+        />
       </Stack>
+      <RegisterBtnArea
+        id={id}
+        mode={id === 'new' ? 'new' : 'update'}
+        setData={setData}
+        dataInit={dataInit}
+        data={data}
+        validation={validation}
+        endpoint={'/course'}
+      />
+    </Stack>
   );
 }
 

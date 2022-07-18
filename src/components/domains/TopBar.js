@@ -47,43 +47,43 @@ const Fade = styled.div`
 
 function TopBar(props) {
 
-    const [isListDisp, setIsListDisp] = useState(false)
+	const [isListDisp, setIsListDisp] = useState(false)
 
-    const Contents = mdList.categories.map(category => {
-        return (
-            <div>
-                {category}
-                <div>
-                    {mdList.contents[category].map(content => {
-                        return (
-                            <ContentsLink href={content}>
-                                {content}
-                            </ContentsLink>
-                        );
-                    })}
-                    <hr/>
-                </div>
-            </div>
-        );
-    })
+	const Contents = mdList.categories.map(category => {
+		return (
+			<div>
+				{category}
+				<div>
+					{mdList.contents[category].map(content => {
+						return (
+							<ContentsLink href={content}>
+								{content}
+							</ContentsLink>
+						);
+					})}
+					<hr />
+				</div>
+			</div>
+		);
+	})
 
-    return(
-        <div>
-            <BarStyle>
-                <BookLink href="#" onClick={() => setIsListDisp(isListDisp ? false : true)}>
-                    <FaBook/>
-                </BookLink>
-                {props.title}
-            </BarStyle>
-            <Transition in={isListDisp}>
-                {(state) => (
-                <Fade state={state}>
-                {Contents}
-                </Fade>
-                    )}
-            </Transition>
-        </div>
-    );
+	return (
+		<div>
+			<BarStyle>
+				<BookLink href="#" onClick={() => setIsListDisp(isListDisp ? false : true)}>
+					<FaBook />
+				</BookLink>
+				{props.title}
+			</BarStyle>
+			<Transition in={isListDisp}>
+				{(state) => (
+					<Fade state={state}>
+						{Contents}
+					</Fade>
+				)}
+			</Transition>
+		</div>
+	);
 }
 
 export default TopBar;

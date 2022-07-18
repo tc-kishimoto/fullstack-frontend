@@ -24,30 +24,30 @@ const DeleteBtn = (props) => {
     setDialogOpen(false)
     setProgressOpen(true)
     axios.delete(props.endpoint + '/' + props.id)
-    .then(res => {
+      .then(res => {
         setSeverity('success')
         setMessage('削除が完了しました。')
         setSnackbarOpen(true);
-    }).catch(error => {
+      }).catch(error => {
         setSeverity('error')
         setMessage('削除に失敗しました。')
         setSnackbarOpen(true);
-    }
-    ).finally(() => setProgressOpen(false))
-}
+      }
+      ).finally(() => setProgressOpen(false))
+  }
 
   return (
     <>
-      <Button 
-        margin="normal" 
-        variant="contained" 
+      <Button
+        margin="normal"
+        variant="contained"
         color="error"
         sx={{ m: 2 }}
         onClick={onDelete}
-        >
+      >
         削除
       </Button>
-      <RegisterDialog 
+      <RegisterDialog
         open={dialogOpen}
         setOpen={setDialogOpen}
         handleSubmit={handleSubmit}
@@ -59,11 +59,11 @@ const DeleteBtn = (props) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <CustomizedSnackbars 
+      <CustomizedSnackbars
         open={snackbarOpen}
         setOpen={setSnackbarOpen}
         severity={severity}
-        message={message}                    
+        message={message}
       />
     </>
   )

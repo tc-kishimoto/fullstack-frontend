@@ -39,40 +39,40 @@ const PageLinkBorder = styled.div`
 `
 
 function ListMain(props) {
-    const categoryName = props.categoryName;
-    const contents = mdList.contents[categoryName];
+	const categoryName = props.categoryName;
+	const contents = mdList.contents[categoryName];
 
-    const PageList = contents.map(c => {
-        return (
-            <PageLinkBorder>
-                <RouterLink to={`/contents/${categoryName}/${c}`}>
-                    <Link underline="hover">{ c }</Link>
-                </RouterLink>
-            </PageLinkBorder>
-        )
-    })
+	const PageList = contents.map(c => {
+		return (
+			<PageLinkBorder>
+				<RouterLink to={`/contents/${categoryName}/${c}`}>
+					<Link underline="hover">{c}</Link>
+				</RouterLink>
+			</PageLinkBorder>
+		)
+	})
 
-    const ListHeader = () => {
-        return (
-            <HeaderDiv>
-                <HeaderImg src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
-                <div>
-                    <h2>{ categoryName }</h2>
-                    <p>カテゴリの説明</p>
-                </div>
-            </HeaderDiv>
-        )
-    }
+	const ListHeader = () => {
+		return (
+			<HeaderDiv>
+				<HeaderImg src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
+				<div>
+					<h2>{categoryName}</h2>
+					<p>カテゴリの説明</p>
+				</div>
+			</HeaderDiv>
+		)
+	}
 
-    return (
-        <ListDiv>
-            <ListHeader />
-            <hr />
-            <PageLinkDiv>
-                { PageList }
-            </PageLinkDiv>
-        </ListDiv>
-    )
+	return (
+		<ListDiv>
+			<ListHeader />
+			<hr />
+			<PageLinkDiv>
+				{PageList}
+			</PageLinkDiv>
+		</ListDiv>
+	)
 }
 
 export default ListMain;

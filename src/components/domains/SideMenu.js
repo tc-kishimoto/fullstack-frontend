@@ -19,41 +19,41 @@ const SideNav = styled.nav`
 `
 
 function SideMenu() {
-    const categories = mdList.categories.map(e => {
-        return (
-            <Accordion>
-                <AccordionSummary
-                    aria-controls={e}
-                    id={e}
-                    >
-                    <Typography>{e}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        <List>
-                            {mdList.contents[e].map(content => {
-                                return (
-                                    <li>
-                                        {/* <Link underline="hover" href={`/contents/${e}/${content}`}>
+	const categories = mdList.categories.map(e => {
+		return (
+			<Accordion>
+				<AccordionSummary
+					aria-controls={e}
+					id={e}
+				>
+					<Typography>{e}</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Typography>
+						<List>
+							{mdList.contents[e].map(content => {
+								return (
+									<li>
+										{/* <Link underline="hover" href={`/contents/${e}/${content}`}>
                                             {content}
                                         </Link> */}
-                                        <RouterLink to={`/contents/${e}/${content}`}>
-                                            {content}
-                                        </RouterLink>
-                                    </li>
-                                );
-                            })}
-                        </List>
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-        );
-    })
-    return (
-        <SideNav>
-           {categories} 
-        </SideNav>
-    );
+										<RouterLink to={`/contents/${e}/${content}`}>
+											{content}
+										</RouterLink>
+									</li>
+								);
+							})}
+						</List>
+					</Typography>
+				</AccordionDetails>
+			</Accordion>
+		);
+	})
+	return (
+		<SideNav>
+			{categories}
+		</SideNav>
+	);
 }
 
 export default SideMenu;

@@ -23,6 +23,6 @@ export default function CustomizedSnackbars(props) {
           {props.message}
         </Alert>
       </Snackbar>
-      </>
+    </>
   );
 }

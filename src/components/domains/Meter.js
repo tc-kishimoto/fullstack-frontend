@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, {
-    useState, useEffect, useRef, useCallback,
-  } from 'react'
+    useState, useEffect, useCallback,
+} from 'react'
 
 const MeterStyle = styled.div`
     background-color: #15214c;
@@ -26,16 +26,14 @@ const Bar = styled.div`
     text-align: center;
 `
 
-
-
 function Meter() {
 
     const [progress, setProgress] = useState(0)
 
     const handleScroll = useCallback(() => {
         const hiddenHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
         //  スクロール量（px）: D
         const scrollPx = document.documentElement.scrollTop;
         //  スクロール量(%)：E = D / C * 100
@@ -46,18 +44,18 @@ function Meter() {
             setProgress(scrollValue);
             // console.log('progress-if', progress)
             // console.log('scrollValue', [scrollValue])
-    
+
             // if(this.isLogin) {
             //     clearTimeout(this.timeoutId);
             //     this.timeoutId = setTimeout(this.updateProgress, this.INTERVAL);
             // }
-    
+
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         document.addEventListener('scroll', handleScroll, { passive: true })
-        return() => document.removeEventListener('scroll', handleScroll, { passive: true })
+        return () => document.removeEventListener('scroll', handleScroll, { passive: true })
     }, [])
 
     return (

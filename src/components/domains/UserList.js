@@ -24,7 +24,7 @@ const UserList = () => {
     });
     setData(result.data);
   }
-  
+
   useEffect(() => {
     const fetchDate = async () => {
       const result = await axios.get('/getUsers');
@@ -38,12 +38,12 @@ const UserList = () => {
       field: 'detail',
       headerName: '詳細',
       width: 100,
-      renderCell: (params) => <Button 
-          variant="contained" 
-          color="primary"  
-          onClick={() => {navigate('/mypage/user/' + params.id)}}>
-          詳細
-        </Button>
+      renderCell: (params) => <Button
+        variant="contained"
+        color="primary"
+        onClick={() => { navigate('/mypage/user/' + params.id) }}>
+        詳細
+      </Button>
     },
     {
       field: 'name',
@@ -76,38 +76,38 @@ const UserList = () => {
       headerName: '編集',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => {navigate('/mypage/user/' + params.id)}}>
-          編集
-        </Button>
+      renderCell: (params) => <Button
+        variant="contained"
+        color="primary"
+        onClick={() => { navigate('/mypage/user/' + params.id) }}>
+        編集
+      </Button>
     },
-    
+
   ];
-  
+
   return (
     <Stack spacing={3}>
       <Stack direction="row" justifyContent="left" spacing={5} >
-        <Button 
-          margin="normal" 
-          variant="contained" 
+        <Button
+          margin="normal"
+          variant="contained"
           color="secondary"
           sx={{ m: 2 }}
           onClick={() => navigate('/mypage/user/new')}
-          >
+        >
           新規登録
         </Button>
       </Stack>
       <Stack direction="row" justifyContent="center" spacing={5} >
         <FormControl>
-            <TextField 
-              label="キーワード" 
-              variant="outlined" 
-              size="small" 
-              color="secondary"
-              onChange={e => setKeyword(e.target.value)}
-            />
+          <TextField
+            label="キーワード"
+            variant="outlined"
+            size="small"
+            color="secondary"
+            onChange={e => setKeyword(e.target.value)}
+          />
         </FormControl>
         <Button variant="contained" color="secondary" onClick={() => search()}><SearchIcon /></Button>
       </Stack>

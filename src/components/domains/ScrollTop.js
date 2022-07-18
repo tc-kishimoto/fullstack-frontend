@@ -17,11 +17,11 @@ const ScrollStyle = styled.div`
 `
 
 function ScrollTop() {
-    return (
-        <Scroll to="root" smooth={true} duration={400}>
-            <ScrollStyle>↑</ScrollStyle>
-        </Scroll>
-    );
+	return (
+		<Scroll to="root" smooth={true} duration={400}>
+			<ScrollStyle>↑</ScrollStyle>
+		</Scroll>
+	);
 }
 
 export default ScrollTop;

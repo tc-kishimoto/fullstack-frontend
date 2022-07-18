@@ -30,61 +30,61 @@ const Li = styled.li`
 
 function Header() {
 
-    const navigate = useNavigate();
-    const [keyword, setKeyword] = useState('');
-    const isLogin = useRecoilValue(isLoginState);
+	const navigate = useNavigate();
+	const [keyword, setKeyword] = useState('');
+	const isLogin = useRecoilValue(isLoginState);
 
-    return (
-        <Grid container spacing={1} m={1} borderBottom={1}>
-            <Grid item xs={6}>
-                <Logo 
-                    src={`${process.env.PUBLIC_URL}/images/index/logo.png`} 
-                    onClick={() => {
-                        navigate('/')
-                    }} 
-                />
-            </Grid>
-            <Grid item xs={3}>
-                <FormControl fullWidth>
-                    <TextField 
-                        label="検索キーワード" 
-                        variant="outlined" 
-                        size="small" 
-                        color="secondary" 
-                        onChange={e => setKeyword(e.target.value)}
-                    />
-                </FormControl>
-            </Grid>
-            <Grid item xs={1}>
-                <Button variant="contained" 
-                    color="secondary"
-                    onClick={() => navigate(`/search?q=${keyword}`, {replace: true})}
-                >
-                    <SearchIcon />
-                </Button>
-            </Grid>
-            <Grid item xs={2}>
-                {isLogin ? (
-                    <Ul>
-                        <Li>
-                            <NotifiMenu />
-                        </Li>
-                        <Li>
-                            <UserMenu />
-                        </Li>
-                    </Ul>
-                ) : 
-                <Button 
-                    variant="outlined" 
-                    color="secondary"
-                    onClick={() => navigate('/login')}
-                >
-                    ログイン
-                </Button>
-                }
-            </Grid>
-        </Grid>
-    )
+	return (
+		<Grid container spacing={1} m={1} borderBottom={1}>
+			<Grid item xs={6}>
+				<Logo
+					src={`${process.env.PUBLIC_URL}/images/index/logo.png`}
+					onClick={() => {
+						navigate('/')
+					}}
+				/>
+			</Grid>
+			<Grid item xs={3}>
+				<FormControl fullWidth>
+					<TextField
+						label="検索キーワード"
+						variant="outlined"
+						size="small"
+						color="secondary"
+						onChange={e => setKeyword(e.target.value)}
+					/>
+				</FormControl>
+			</Grid>
+			<Grid item xs={1}>
+				<Button variant="contained"
+					color="secondary"
+					onClick={() => navigate(`/search?q=${keyword}`, { replace: true })}
+				>
+					<SearchIcon />
+				</Button>
+			</Grid>
+			<Grid item xs={2}>
+				{isLogin ? (
+					<Ul>
+						<Li>
+							<NotifiMenu />
+						</Li>
+						<Li>
+							<UserMenu />
+						</Li>
+					</Ul>
+				) :
+					<Button
+						variant="outlined"
+						color="secondary"
+						onClick={() => navigate('/login')}
+					>
+						ログイン
+					</Button>
+				}
+			</Grid>
+		</Grid>
+	)
 }
 
 export default Header;

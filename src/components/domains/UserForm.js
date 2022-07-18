@@ -26,10 +26,10 @@ function UserForm() {
   }
 
   const roles = [
-    {id: 1, name: 'システム管理者'},
-    {id: 2, name: '企業担当者'},
-    {id: 3, name: '講師'},
-    {id: 4, name: '一般'},
+    { id: 1, name: 'システム管理者' },
+    { id: 2, name: '企業担当者' },
+    { id: 3, name: '講師' },
+    { id: 4, name: '一般' },
   ]
 
   const [data, setData] = useState(dataInit);
@@ -37,8 +37,8 @@ function UserForm() {
 
   useEffect(() => {
     const fetchDate = async () => {
-        const result = await axios.get('/getCompanies');
-        setCompanies(result.data);
+      const result = await axios.get('/getCompanies');
+      setCompanies(result.data);
     }
     const getUser = async () => {
       const result = await axios.get('getUser/' + id);
@@ -51,98 +51,98 @@ function UserForm() {
   const handleChange = (event) => {
     const { name, value } = event.target
     setData(
-        {...data, [name]: value}
+      { ...data, [name]: value }
     )
   }
 
   const textFields = [
-    {name: 'email', label: 'メールアドレス', type: 'text'},
-    {name: 'login_id', label: 'ログインID', type: 'text'},
-    {name: 'name', label: '名前', type: 'text'},
-    {name: 'name_kana', label: '名前（カナ）', type: 'text'},
-    {name: 'password', label: 'パスワード', type: 'password'},
-    {name: 'rePassword', label: 'パスワード（確認用）', type: 'password'},
+    { name: 'email', label: 'メールアドレス', type: 'text' },
+    { name: 'login_id', label: 'ログインID', type: 'text' },
+    { name: 'name', label: '名前', type: 'text' },
+    { name: 'name_kana', label: '名前（カナ）', type: 'text' },
+    { name: 'password', label: 'パスワード', type: 'password' },
+    { name: 'rePassword', label: 'パスワード（確認用）', type: 'password' },
   ]
 
   const validation = () => {
     return true;
   }
 
-    return (
-        <Stack spacing={5}>
-            {textFields.map(e => {
-                return(
-                    <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
-                        <TextField 
-                            required
-                            name={e.name}
-                            label={e.label}
-                            type={e.type}
-                            variant="filled"
-                            sx={{ width: '50%' }} 
-                            value={data[e.name]}
-                            onChange={handleChange}
-                            />
-                    </Stack>
-                )
-            })}
-            <Stack direction="row" justifyContent="center">
-                <FormControl sx={{ width: '50%'}}>
-                    <InputLabel>権限</InputLabel>
-                    <Select
-                        required
-                        name="role"
-                        label="権限"
-                        value={data.role}
-                        onChange={handleChange}
-                    >
-                            {roles.map(e => {
-                                return (
-                                    <MenuItem 
-                                        value={e.id}
-                                        key={e.id}
-                                    >
-                                        {e.name}
-                                    </MenuItem>
-                                );
-                            })}
-                    </Select>
-                </FormControl>
-            </Stack>
-            <Stack direction="row" justifyContent="center">
-                <FormControl sx={{ width: '50%'}}>
-                  <InputLabel>所属企業</InputLabel>
-                  <Select
-                    required
-                    name="company_id"
-                    label="所属企業"
-                    value={data.company_id}
-                    onChange={handleChange}
-                  >
-                    {companies.map(e => {
-                      return (
-                      <MenuItem 
-                      value={e.id}
-                      key={e.id}
-                      >
-                      {e.name}
-                      </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-            </Stack>
-            <RegisterBtnArea
-              id={id}
-              mode={id === 'new' ? 'new' : 'update'}
-              setData={setData}
-              dataInit={dataInit}
-              data={data}
-              validation={validation}
-              endpoint={'/user'}
+  return (
+    <Stack spacing={5}>
+      {textFields.map(e => {
+        return (
+          <Stack direction="row" justifyContent="center" spacing={5} key={e.name}>
+            <TextField
+              required
+              name={e.name}
+              label={e.label}
+              type={e.type}
+              variant="filled"
+              sx={{ width: '50%' }}
+              value={data[e.name]}
+              onChange={handleChange}
             />
-        </Stack>
-    );
+          </Stack>
+        )
+      })}
+      <Stack direction="row" justifyContent="center">
+        <FormControl sx={{ width: '50%' }}>
+          <InputLabel>権限</InputLabel>
+          <Select
+            required
+            name="role"
+            label="権限"
+            value={data.role}
+            onChange={handleChange}
+          >
+            {roles.map(e => {
+              return (
+                <MenuItem
+                  value={e.id}
+                  key={e.id}
+                >
+                  {e.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </Stack>
+      <Stack direction="row" justifyContent="center">
+        <FormControl sx={{ width: '50%' }}>
+          <InputLabel>所属企業</InputLabel>
+          <Select
+            required
+            name="company_id"
+            label="所属企業"
+            value={data.company_id}
+            onChange={handleChange}
+          >
+            {companies.map(e => {
+              return (
+                <MenuItem
+                  value={e.id}
+                  key={e.id}
+                >
+                  {e.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </Stack>
+      <RegisterBtnArea
+        id={id}
+        mode={id === 'new' ? 'new' : 'update'}
+        setData={setData}
+        dataInit={dataInit}
+        data={data}
+        validation={validation}
+        endpoint={'/user'}
+      />
+    </Stack>
+  );
 }
 
 export default UserForm;

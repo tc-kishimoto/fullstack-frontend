@@ -18,7 +18,7 @@ const RegisterBtn = (props) => {
   // const validation = props.validation;
 
   const onRegister = () => {
-    if(!props.validation()) {
+    if (!props.validation()) {
       return;
     }
     setDialogOpen(true)
@@ -29,33 +29,33 @@ const RegisterBtn = (props) => {
     setDialogOpen(false)
     setProgressOpen(true)
     method(props.endpoint, {
-        ...props.data
+      ...props.data
     }).then(res => {
-        console.log(res)
-        setSeverity('success')
-        setMessage('更新完了しました。')
-        setSnackbarOpen(true);
+      console.log(res)
+      setSeverity('success')
+      setMessage('更新完了しました。')
+      setSnackbarOpen(true);
     }).catch(error => {
-        console.log(error)
-        setSeverity('error')
-        setMessage('更新に失敗しました。')
-        setSnackbarOpen(true);
+      console.log(error)
+      setSeverity('error')
+      setMessage('更新に失敗しました。')
+      setSnackbarOpen(true);
     }
     ).finally(() => setProgressOpen(false))
-}
+  }
 
   return (
     <>
-      <Button 
-        margin="normal" 
-        variant="contained" 
+      <Button
+        margin="normal"
+        variant="contained"
         color="secondary"
         sx={{ m: 2 }}
         onClick={onRegister}
-        >
+      >
         {props.mode === 'new' ? '登録' : '更新'}
       </Button>
-      <RegisterDialog 
+      <RegisterDialog
         open={dialogOpen}
         setOpen={setDialogOpen}
         handleSubmit={handleSubmit}
@@ -67,11 +67,11 @@ const RegisterBtn = (props) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <CustomizedSnackbars 
+      <CustomizedSnackbars
         open={snackbarOpen}
         setOpen={setSnackbarOpen}
         severity={severity}
-        message={message}                    
+        message={message}
       />
     </>
   )

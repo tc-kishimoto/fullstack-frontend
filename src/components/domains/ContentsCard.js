@@ -64,36 +64,36 @@ const MoreBtn = styled.button`
 
 function ContentsCard(props) {
 
-    const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-    const categoryName = props.categoryName;
-    const contens =props.contents.map((e, index) => {
-        if(isOpen || (!isOpen && index < 5)) {
-            return (
-                <p>
-                    <ContentLink 
-                        href={`/contents/${categoryName}/${e}`}
-                        key={`${categoryName}-${e}`}>
-                            {e}
-                    </ContentLink>
-                </p>
-            );
-        }
-    });
-    return(
-        <ContentDiv>
-            <HeaderDiv>
-                <CardImg alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
-                <H2>
-                    <HeadLink herf="#">{categoryName}</HeadLink>
-                </H2>
-            </HeaderDiv>
-            <DetailDiv>
-                {contens}
-            </DetailDiv>
-            <MoreBtn onClick={() => setIsOpen(isOpen ? false : true)}>{isOpen ? 'close' : 'open'}</MoreBtn>
-        </ContentDiv>
-    );
+	const categoryName = props.categoryName;
+	const contens = props.contents.map((e, index) => {
+		if (isOpen || (!isOpen && index < 5)) {
+			return (
+				<p>
+					<ContentLink
+						href={`/contents/${categoryName}/${e}`}
+						key={`${categoryName}-${e}`}>
+						{e}
+					</ContentLink>
+				</p>
+			);
+		}
+	});
+	return (
+		<ContentDiv>
+			<HeaderDiv>
+				<CardImg alt={categoryName} src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
+				<H2>
+					<HeadLink herf="#">{categoryName}</HeadLink>
+				</H2>
+			</HeaderDiv>
+			<DetailDiv>
+				{contens}
+			</DetailDiv>
+			<MoreBtn onClick={() => setIsOpen(isOpen ? false : true)}>{isOpen ? 'close' : 'open'}</MoreBtn>
+		</ContentDiv>
+	);
 }
 
 export default ContentsCard;

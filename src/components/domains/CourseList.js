@@ -42,7 +42,7 @@ const CourseList = () => {
       renderCell: (params) => <Button 
           variant="contained" 
           color="primary"  
-          onClick={() => {navigate('/mypage/course/' + params.id)}}>
+          onClick={() => {navigate('/mypage/courseDetail/' + params.id)}}>
           詳細
         </Button>
     },

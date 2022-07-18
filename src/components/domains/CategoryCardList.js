@@ -14,25 +14,25 @@ const CategoryList = styled.div`
 const CategoryCardList = () => {
   const category = mdList.categories.map(e => {
     return (
-      <CategoryCard 
-          categoryName={e}
-          contents={mdList.contents[e]}
-          key={e}
+      <CategoryCard
+        categoryName={e}
+        contents={mdList.contents[e]}
+        key={e}
       />
     )
   })
   return (
     <Stack spacing={2}>
-        <Stack
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-            >
-          <CategoryList>
-              {category}
-          </CategoryList>
-        </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <CategoryList>
+          {category}
+        </CategoryList>
+      </Stack>
     </Stack>
   )
 }

@@ -9,14 +9,14 @@ const NewsStyle = styled.div`
 `
 
 function News(props) {
-    return (
-        <div>
-            お知らせ
-            <NewsStyle>
-                {props.news}
-            </NewsStyle>
-        </div>
-    );
+	return (
+		<div>
+			お知らせ
+			<NewsStyle>
+				{props.news}
+			</NewsStyle>
+		</div>
+	);
 }
 
 export default News;

@@ -17,23 +17,23 @@ const MenuIcon = styled.img`
 
 export default function ListMenu() {
 
-    const contents = Object.keys(mdList.contents).map(e => {
-        return (
-            <RouterLink to={`/list/${e}`}>
-              <ListItemButton sx={{padding: '5px'}}>
-                <ListItemIcon>
-                      <MenuIcon src={`${process.env.PUBLIC_URL}/images/index/${e}.png`} />
-                  </ListItemIcon>
-                  <ListItemText primary={`${e}`} sx={{color: '#333333'}} />
-              </ListItemButton>
-            </RouterLink>
-        );
-    })
+  const contents = Object.keys(mdList.contents).map(e => {
+    return (
+      <RouterLink to={`/list/${e}`}>
+        <ListItemButton sx={{ padding: '5px' }}>
+          <ListItemIcon>
+            <MenuIcon src={`${process.env.PUBLIC_URL}/images/index/${e}.png`} />
+          </ListItemIcon>
+          <ListItemText primary={`${e}`} sx={{ color: '#333333' }} />
+        </ListItemButton>
+      </RouterLink>
+    );
+  })
 
   return (
     <Box sx={{ width: '100%', maxWidth: 200, bgcolor: 'lightblue', filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))' }}>
       <List>
-        { contents }
+        {contents}
       </List>
     </Box>
   );

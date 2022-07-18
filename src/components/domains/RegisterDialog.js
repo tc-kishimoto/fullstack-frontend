@@ -24,7 +24,7 @@ export default function RegisterDialog(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          {props.modeName}しますか？
+            {props.modeName}しますか？
           </DialogContentText>
         </DialogContent>
         <DialogActions>
