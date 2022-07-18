@@ -38,7 +38,12 @@ const CompanyList = () => {
       field: 'detail',
       headerName: '詳細',
       width: 100,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>詳細</Button>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary"  
+          onClick={() => {navigate('/mypage/company/' + params.id)}}>
+          詳細
+        </Button>
     },
     {
       field: 'name',
@@ -61,7 +66,12 @@ const CompanyList = () => {
       field: 'id',
       headerName: '編集',
       width: 100,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/company/' + params.id)}}>編集</Button>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary"  
+          onClick={() => {navigate('/mypage/company/' + params.id)}}>
+            編集
+          </Button>
     },
     
   ];

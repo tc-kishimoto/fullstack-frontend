@@ -11,6 +11,7 @@ import UserList from './components/domains/UserList';
 import UserForm from './components/domains/UserForm';
 import CompanyForm from './components/domains/CompanyForm';
 import CourseForm from './components/domains/CourseForm';
+import MySubmissionList from './components/domains/MySubmissionList';
 
 import {
   BrowserRouter,
@@ -44,6 +45,7 @@ function App() {
           </Route>
           <Route path="/mypage"
                   element={<MyPage />}>
+            <Route path="submission" element={<MySubmissionList/>}></Route>
             <Route path="user" element={<UserList/>}></Route>
             <Route path="company" element={<CompanyList/>}></Route>
             <Route path="course" element={<CourseList/>}></Route>

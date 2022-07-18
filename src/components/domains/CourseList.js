@@ -39,7 +39,12 @@ const CourseList = () => {
       headerName: '詳細',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/course/' + params.id)}}>詳細</Button>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary"  
+          onClick={() => {navigate('/mypage/course/' + params.id)}}>
+          詳細
+        </Button>
     },
     {
       field: 'name',
@@ -51,7 +56,12 @@ const CourseList = () => {
       headerName: '編集',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/course/' + params.id)}}>編集</Button>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary"  
+          onClick={() => {navigate('/mypage/course/' + params.id)}}>
+            編集
+          </Button>
     },
     
   ];

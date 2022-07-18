@@ -38,7 +38,10 @@ const UserList = () => {
       field: 'detail',
       headerName: '詳細',
       width: 100,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/user/' + params.id)}}>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary"  
+          onClick={() => {navigate('/mypage/user/' + params.id)}}>
           詳細
         </Button>
     },
@@ -73,7 +76,10 @@ const UserList = () => {
       headerName: '編集',
       width: 100,
       disableClickEventBubbling: true,
-      renderCell: (params) => <Button variant="contained" color="primary"  onClick={() => {navigate('/mypage/user/' + params.id)}}>
+      renderCell: (params) => <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => {navigate('/mypage/user/' + params.id)}}>
           編集
         </Button>
     },
