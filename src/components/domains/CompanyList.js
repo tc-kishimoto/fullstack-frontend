@@ -41,7 +41,7 @@ const CompanyList = () => {
       renderCell: (params) => <Button
         variant="contained"
         color="primary"
-        onClick={() => { navigate('/mypage/company/' + params.id) }}>
+        onClick={() => { navigate('/mypage/companyDetail/' + params.id) }}>
         詳細
       </Button>
     },
