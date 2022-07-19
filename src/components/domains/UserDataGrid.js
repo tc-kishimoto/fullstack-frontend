@@ -14,7 +14,7 @@ const UserDataGrid = (props) => {
       renderCell: (params) => <Button
         variant="contained"
         color="primary"
-        onClick={() => { navigate('/mypage/user/' + params.id) }}>
+        onClick={() => { navigate('/mypage/userDetail/' + params.id) }}>
         詳細
       </Button>
     },
