@@ -16,15 +16,16 @@ const UserTab = (props) => {
     <h3>{data.name}</h3>
       <TabContext value={tabValue}>
         <TabList aria-label="basic tabs example" onChange={(e, newValue) => setTabValue(newValue)}>
-          <Tab label="ユーザー一覧" value="1" />
+          {props.isUserDisp ? <Tab label="ユーザー一覧" value="1" /> : <></>}
           <Tab label="演習提出" value="2" />
           <Tab label="テスト結果" value="3" />
           <Tab label="日報" value="4" />
         </TabList>
         <TabPanel value="1">
+          {props.isUserDisp ?
           <UserDataGrid 
             data={props.users}
-          />
+          /> : <></>}
         </TabPanel>
         <TabPanel value="2">
           lesson

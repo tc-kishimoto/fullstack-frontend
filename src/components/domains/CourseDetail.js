@@ -22,6 +22,7 @@ const CourseDetail = () => {
       id={id}
       users={users}
       endpoint={'getCourse'}
+      isUserDisp={true}
     />
   )
 }

@@ -22,6 +22,7 @@ const CompanyDetail = () => {
       id={id}
       users={users}
       endpoint={'getCompany'}
+      isUserDisp={true}
     />
   )
 }
