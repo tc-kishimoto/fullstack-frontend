@@ -21,8 +21,9 @@ const CourseDetail = () => {
     <UserTab
       id={id}
       users={users}
+      submissions={[]}
       endpoint={'getCourse'}
-      isUserDisp={true}
+      isUserDisabled={false}
     />
   )
 }

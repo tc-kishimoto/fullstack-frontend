@@ -21,8 +21,9 @@ const CompanyDetail = () => {
     <UserTab
       id={id}
       users={users}
+      submissions={[]}
       endpoint={'getCompany'}
-      isUserDisp={true}
+      isUserDisabled={false}
     />
   )
 }

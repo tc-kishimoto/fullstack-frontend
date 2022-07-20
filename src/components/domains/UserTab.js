@@ -5,10 +5,11 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react';
 import FetchData from './FetchData';
 import UserDataGrid from './UserDataGrid';
+import SubmissionDataGrid from './SubmittionDataGrid';
 
 const UserTab = (props) => {
 
-  const [tabValue, setTabValue] = useState('1');
+  const [tabValue, setTabValue] = useState(props.isUserDisabled ? '2' : '1');
   const [data, setData] = useState({});
 
   return (
@@ -16,24 +17,25 @@ const UserTab = (props) => {
     <h3>{data.name}</h3>
       <TabContext value={tabValue}>
         <TabList aria-label="basic tabs example" onChange={(e, newValue) => setTabValue(newValue)}>
-          {props.isUserDisp ? <Tab label="ユーザー一覧" value="1" /> : <></>}
+          <Tab label="ユーザー一覧" value="1" disabled={props.isUserDisabled} /> 
           <Tab label="演習提出" value="2" />
           <Tab label="テスト結果" value="3" />
           <Tab label="日報" value="4" />
         </TabList>
-        <TabPanel value="1">
-          {props.isUserDisp ?
-          <UserDataGrid 
-            data={props.users}
-          /> : <></>}
+          <TabPanel value="1" index={0}>
+            <UserDataGrid 
+              data={props.users}
+            /> 
+          </TabPanel>
+        <TabPanel value="2" index={1}>
+          <SubmissionDataGrid 
+            data={props.submissions}
+          />
         </TabPanel>
-        <TabPanel value="2">
-          lesson
-        </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="3" index={2}>
           test
         </TabPanel>
-        <TabPanel value="4">
+        <TabPanel value="4" index={3}>
           dayly
         </TabPanel>
       </TabContext>

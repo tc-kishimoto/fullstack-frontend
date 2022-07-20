@@ -12,7 +12,8 @@ const UserDetail = () => {
       id={id}
       users={[]}
       endpoint={'getUser'}
-      isUserDisp={false}
+      isUserDisabled={true}
+      submissions={[]}
     />
   )
 }
