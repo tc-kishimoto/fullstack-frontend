@@ -15,13 +15,14 @@ const CompanyDetail = () => {
       setUsers(result.data);
     }
     fetchDate();
+
   }, []);
 
   return (
     <UserTab
       id={id}
       users={users}
-      submissions={[]}
+      submissionParams={{params: {company_id: id}}}
       endpoint={'getCompany'}
       isUserDisabled={false}
     />

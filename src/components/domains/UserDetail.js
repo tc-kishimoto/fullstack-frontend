@@ -6,6 +6,9 @@ import UserTab from "./UserTab";
 const UserDetail = () => {
 
   const { id } = useParams();
+  useEffect(() => {
+
+  }, [])
 
   return (
     <UserTab
@@ -13,7 +16,7 @@ const UserDetail = () => {
       users={[]}
       endpoint={'getUser'}
       isUserDisabled={true}
-      submissions={[]}
+      submissionParams={{params: {user_id: id}}}
     />
   )
 }

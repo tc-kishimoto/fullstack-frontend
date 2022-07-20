@@ -29,7 +29,7 @@ const UserTab = (props) => {
           </TabPanel>
         <TabPanel value="2" index={1}>
           <SubmissionDataGrid 
-            data={props.submissions}
+            params={props.submissionParams}
           />
         </TabPanel>
         <TabPanel value="3" index={2}>

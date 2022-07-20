@@ -10,18 +10,18 @@ const CourseDetail = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchDate = async () => {
+    const fetchUsers = async () => {
       const result = await axios.get('/getCourseUsers/' + id);
       setUsers(result.data);
     }
-    fetchDate();
+    fetchUsers();
   }, []);
 
   return (
     <UserTab
       id={id}
       users={users}
-      submissions={[]}
+      submissionParams={{params: {course_id: id}}}
       endpoint={'getCourse'}
       isUserDisabled={false}
     />
