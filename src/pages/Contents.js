@@ -16,7 +16,6 @@ import remarkGfm from 'remark-gfm'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { marked } from "marked";
@@ -51,94 +50,103 @@ const Image = styled.img`
 `
 
 
-function Toc(props) {
-    const heading = marked.lexer(props.content).filter(token => token.type === 'heading')
-    return (
-        <SideNav>
-            <List>
-                {heading.map(e => {
-                    const linkStyle = {marginLeft: ((e.depth - 1) * 10) + 'px'}
-                    return (
-                        <li>
-                            <Link href={`#${e.text}`} underline="hover" style={linkStyle}>
-                                {e.text}
-                            </Link>
-                        </li>
-                    );
-                })}
-            </List>
-        </SideNav>
-    );
-
+const Toc = (props) => {
+	const heading = marked.lexer(props.content).filter(token => token.type === 'heading')
+	return (
+		<SideNav>
+			<List>
+				{heading.map(e => {
+					const linkStyle = { marginLeft: ((e.depth - 1) * 10) + 'px' }
+					return (
+						<li>
+							<Link href={`#${e.text}`} underline="hover" style={linkStyle}>
+								{e.text}
+							</Link>
+						</li>
+					);
+				})}
+			</List>
+		</SideNav>
+	);
 }
 
-function Contents() {
+const isLesson = (contentName) => {
+	if(contentName.match(/演習問題[0-9]+/) && contentName.indexOf('模範解答') < 0) {
+		return true;
+	}
+	if(contentName.match(/練習問題[0-9]+/) && contentName.indexOf('模範解答') < 0) {
+			return true;
+	}
+	if(contentName.match(/単元課題[0-9]+/) && contentName.indexOf('模範解答') < 0) {
+			return true;
+	}
+	return false;
+}
 
-    const [content, setContent] = useState('');
-    
-    const { category, contentName } = useParams();
+const Contents = () => {
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(
-            `/markdowns/${category}/${contentName}.md`,
-            );
+	const [content, setContent] = useState('');
+	const { category, contentName } = useParams();
 
-            setContent(result.data);
-        };
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await axios(
+				`/markdowns/${category}/${contentName}.md`,
+			);
+			setContent(result.data);
+		};
+		fetchData();
+	});
 
-        fetchData();
-    });
-    
-    return (
-        <div>
-            <TopBar title={contentName}/>
-            <ScrollTop/>
-            <Main>
-                <SideMenu 
-                    categoryName={category} 
-                    contents={mdList.contents[category]} 
-                />
-                <ContentDiv>
-                    {/* <div dangerouslySetInnerHTML={{__html: html}}/> */}
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
-                        code({node, inline, className, children, ...props}) {
-                            const match = /language-(\w+)/.exec(className || '')
-                            return !inline && match ? (
-                              <SyntaxHighlighter
-                                children={String(children).replace(/\n$/, '')}
-                                style={okaidia}
-                                language={match[1]}
-                                PreTag="div"
-                                {...props}
-                              />
-                            ) : (
-                              <code className={className} {...props}>
-                                {children}
-                              </code>
-                            )
-                          }
-                        ,
-                        a({node, inline, className, children, ...props}){ 
-                            return (<Link underline="hover" target="_blank" {...props}>{children}</Link>)},
-                        h1({node, inline, className, children}){return (<h1 id={children}>{children}</h1>)},
-                        h2({node, inline, className, children}){return (<h2 id={children}>{children}</h2>)},
-                        h3({node, inline, className, children}){return (<h3 id={children}>{children}</h3>)},
-                        img: Image,
-                        table: Table, 
-                        tr: TableRow, 
-                        thead: TableHead, 
-                        tbody: TableBody,
-                        td: TableCell
-                        }} children={content}/>
-                    <hr/>
-                    <SubmissionForm/>
-                </ContentDiv>
-                <Toc content={content} />
-            </Main>
-            <Meter/>
-        </div>
-    );
+	return (
+		<div>
+			<TopBar title={contentName} />
+			<ScrollTop />
+			<Main>
+				<SideMenu
+					categoryName={category}
+					contents={mdList.contents[category]}
+				/>
+				<ContentDiv>
+					<ReactMarkdown remarkPlugins={[remarkGfm]} components={{
+						code({ node, inline, className, children, ...props }) {
+							const match = /language-(\w+)/.exec(className || '')
+							return !inline && match ? (
+								<SyntaxHighlighter
+									children={String(children).replace(/\n$/, '')}
+									style={okaidia}
+									language={match[1]}
+									PreTag="div"
+									{...props}
+								/>
+							) : (
+								<code className={className} {...props}>
+									{children}
+								</code>
+							)
+						}
+						,
+						a({ node, inline, className, children, ...props }) {
+							return (<Link underline="hover" target="_blank" {...props}>{children}</Link>)
+						},
+						h1({ node, inline, className, children }) { return (<h1 id={children}>{children}</h1>) },
+						h2({ node, inline, className, children }) { return (<h2 id={children}>{children}</h2>) },
+						h3({ node, inline, className, children }) { return (<h3 id={children}>{children}</h3>) },
+						img: Image,
+						table: Table,
+						tr: TableRow,
+						thead: TableHead,
+						tbody: TableBody,
+						td: TableCell
+					}} children={content} />
+					<hr />
+					{isLesson(contentName) ? <SubmissionForm /> : <></>}
+				</ContentDiv>
+				<Toc content={content} />
+			</Main>
+			<Meter />
+		</div>
+	);
 }
 
 export default Contents;
