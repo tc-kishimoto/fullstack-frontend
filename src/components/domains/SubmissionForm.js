@@ -2,14 +2,44 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-function SubmissionForm() {
+function SubmissionForm(props) {
 	return (
 		<div>
 			<h2>提出フォーム</h2>
-			<TextField fullWidth margin="normal" id="category" label="カテゴリ" variant="outlined" size="small" />
-			<TextField fullWidth margin="normal" id="name" label="演習名" variant="outlined" size="small" />
-			<TextField fullWidth margin="normal" id="url" label="提出先URL" variant="outlined" size="small" />
-			<TextField fullWidth margin="normal" id="comment" label="コメント" variant="outlined"
+			<TextField 
+				fullWidth 
+				margin="normal" 
+				id="category" 
+				label="カテゴリ" 
+				variant="outlined" 
+				size="small"
+				defaultValue={props.category}
+				disabled
+			/>
+			<TextField 
+				fullWidth 
+				margin="normal" 
+				id="name" 
+				label="演習名" 
+				variant="outlined" 
+				size="small"
+				defaultValue={props.contentName}
+				disabled
+			/>
+			<TextField 
+				fullWidth 
+				margin="normal" 
+				id="url" 
+				label="提出先URL" 
+				variant="outlined" 
+				size="small" 
+			/>
+			<TextField 
+				fullWidth 
+				margin="normal" 
+				id="comment" 
+				label="コメント" 
+				variant="outlined"
 				multiline
 				rows={4}
 			/>

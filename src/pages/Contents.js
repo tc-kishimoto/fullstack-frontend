@@ -140,7 +140,12 @@ const Contents = () => {
 						td: TableCell
 					}} children={content} />
 					<hr />
-					{isLesson(contentName) ? <SubmissionForm /> : <></>}
+					{isLesson(contentName) ? 
+						<SubmissionForm 
+							category={category}
+							contentName={contentName} 
+						/> 
+					: <></>}
 				</ContentDiv>
 				<Toc content={content} />
 			</Main>
