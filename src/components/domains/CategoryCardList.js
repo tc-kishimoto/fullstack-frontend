@@ -3,6 +3,7 @@ import CategoryCard from "./CategoryCard"
 import Stack from '@mui/material/Stack';
 import mdList from "../../config/mdlist.json"
 import styled from "styled-components";
+import config from '../../config/config.json'
 
 const CategoryList = styled.div`
     align-items: flex-start;
@@ -18,6 +19,7 @@ const CategoryCardList = () => {
         categoryName={e}
         contents={mdList.contents[e]}
         key={e}
+        explain={config.categoryInfo[e].explain}
       />
     )
   })

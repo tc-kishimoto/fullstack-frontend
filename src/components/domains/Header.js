@@ -35,7 +35,7 @@ function Header() {
 	const isLogin = useRecoilValue(isLoginState);
 
 	return (
-		<Grid container spacing={1} m={1} borderBottom={1}>
+		<Grid container spacing={1} m={1} bgcolor={'#FEF'}>
 			<Grid item xs={6}>
 				<Logo
 					src={`${process.env.PUBLIC_URL}/images/index/logo.png`}

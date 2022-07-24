@@ -75,7 +75,7 @@ function CategoryCard(props) {
 			</RouterLink>
 			<CardContent>
 				<Typography variant="body2" color="text.secondary">
-					{'説明'}
+					{props.explain}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
