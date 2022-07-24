@@ -15,12 +15,17 @@ const MenuIcon = styled.img`
     margin: 0 auto;
 `
 
+const linkStyle = {
+  textDecoration: 'none',
+	color: 'blue'
+}
+
 export default function ListMenu() {
 
   const contents = Object.keys(mdList.contents).map(e => {
     return (
-      <RouterLink to={`/list/${e}`}>
-        <ListItemButton sx={{ padding: '5px' }}>
+      <RouterLink style={linkStyle} to={`/list/${e}`}>
+        <ListItemButton sx={{ padding: '7px' }}>
           <ListItemIcon>
             <MenuIcon src={`${process.env.PUBLIC_URL}/images/index/${e}.png`} />
           </ListItemIcon>

@@ -4,10 +4,8 @@ import ListMenu from "../components/domains/ListMenu";
 import ListMain from "../components/domains/ListMain";
 
 const ListDiv = styled.div`
-    width: 70%;
     margin: 0 auto;
     padding: 24px;
-    background-color: aliceblue;
     display: flex;
 `
 

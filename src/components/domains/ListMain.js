@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import mdList from "../../config/mdlist.json"
+import config from "../../config/config.json"
 import Link from '@mui/material/Link';
 import { Link as RouterLink } from "react-router-dom";
 
@@ -38,6 +39,11 @@ const PageLinkBorder = styled.div`
     padding: 15px;
 `
 
+const linkStyle = {
+  textDecoration: 'none',
+	color: 'blue'
+}
+
 function ListMain(props) {
 	const categoryName = props.categoryName;
 	const contents = mdList.contents[categoryName];
@@ -45,7 +51,7 @@ function ListMain(props) {
 	const PageList = contents.map(c => {
 		return (
 			<PageLinkBorder>
-				<RouterLink to={`/contents/${categoryName}/${c}`}>
+				<RouterLink style={linkStyle} to={`/contents/${categoryName}/${c}`}>
 					<Link underline="hover">{c}</Link>
 				</RouterLink>
 			</PageLinkBorder>
@@ -58,7 +64,7 @@ function ListMain(props) {
 				<HeaderImg src={`${process.env.PUBLIC_URL}/images/index/${categoryName}.png`} />
 				<div>
 					<h2>{categoryName}</h2>
-					<p>カテゴリの説明</p>
+					<p>{config.categoryInfo[categoryName].explain}</p>
 				</div>
 			</HeaderDiv>
 		)
