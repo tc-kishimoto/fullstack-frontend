@@ -64,20 +64,11 @@ function UserMenu() {
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
 				<MenuItem onClick={() => navigate('/mypage')}>
-					<Avatar />MyPage
+					<Avatar />マイページ
 				</MenuItem>
 				<Divider />
 				<MenuItem component="a" href="#">
-					ユーザー管理
-				</MenuItem>
-				<MenuItem component="a" href="#">
-					企業管理
-				</MenuItem>
-				<MenuItem component="a" href="#">
-					コース管理
-				</MenuItem>
-				<MenuItem component="a" href="#">
-					問題管理
+					設定
 				</MenuItem>
 				<Divider />
 				<MenuItem
@@ -93,7 +84,7 @@ function UserMenu() {
 					<ListItemIcon>
 						<Logout fontSize="small" />
 					</ListItemIcon>
-					Logout
+					ログアウト
 				</MenuItem>
 			</Menu>
 		</div>
