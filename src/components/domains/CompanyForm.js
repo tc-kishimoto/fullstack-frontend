@@ -12,7 +12,7 @@ function CompanyForm() {
   const dataInit = {
     name: '',
     short_name: '',
-    url: '',
+    URL: '',
   }
 
   const [data, setData] = useState(dataInit);
