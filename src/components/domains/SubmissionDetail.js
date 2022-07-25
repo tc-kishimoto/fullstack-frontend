@@ -8,7 +8,14 @@ import Button from '@mui/material/Button';
 const SubmissionDetail = () => {
 
   const axios = useAxios();
-  const [data, setData] = useState({ comments: [] })
+  const dataInit = {
+    category: '',
+    lesson_name: '',
+    url: '',
+    comment: '',
+    comments: [],
+  }
+  const [data, setData] = useState(dataInit)
   const { id } = useParams();
 
   useEffect(() => {
@@ -66,6 +73,24 @@ const SubmissionDetail = () => {
           rows={4}
         />
       </Stack>
+      <Stack direction="row" spacing={3}>
+        <Button
+          margin="normal"
+          variant="contained"
+          color="secondary"
+          sx={{ m: 2 }}
+        >
+          更新
+        </Button>
+        <Button
+          margin="normal"
+          variant="contained"
+          color="secondary"
+          sx={{ m: 2 }}
+        >
+          削除
+        </Button>
+      </Stack>
       <hr />
       <h3>コメント</h3>
       {data.comments.map(e => {
@@ -95,7 +120,7 @@ const SubmissionDetail = () => {
           rows={4}
         />
       </Stack>
-      <Stack direction="row" justifyContent="center" spacing={5} >
+      <Stack direction="row"  spacing={5} >
         <Button
           margin="normal"
           variant="contained"
