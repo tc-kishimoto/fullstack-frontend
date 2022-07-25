@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import UserSideMenu from '../components/domains/UserSideMenu';
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 
 function MyPage() {
